@@ -1,9 +1,9 @@
-import request from '@/utils/request'
-// 获取图片
-export const getImg = params => {
+import request from '@/utils/request.js'
+// 获取列表
+export const getTable = params => {
   return request({
     method: 'GET',
-    url: '/upload/pic/findPicById',
+    url: '/findreinspection',
     params
   })
 }

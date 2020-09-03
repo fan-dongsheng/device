@@ -40,6 +40,17 @@ import tableCont from './tableCont'
 export default {
   components: {
     tableCont
+  },
+  data () {
+    return {
+      // 搜索
+      inputV: ''
+    }
+  },
+  methods: {
+    changeAllStatus () {
+
+    }
   }
 }
 </script>
