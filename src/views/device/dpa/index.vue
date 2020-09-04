@@ -3,7 +3,7 @@
     <el-table
       border
       ref="multipleTable"
-      :data="tableDatas.reinspectionList "
+      :data="tableDatas.reinspectionList || tableData"
       tooltip-effect="dark"
       :header-cell-style="{ background: '#E5F0FF',color:'#6D87A7',textAlign:'center' }"
       :cell-style="cellstyle"
@@ -63,21 +63,20 @@
       <el-table-column prop="productionlot" label="生产批次"></el-table-column>
       <el-table-column prop="manufacturer" label="生产厂家"></el-table-column>
       <el-table-column prop="countriesorimports" label="国产/进口"></el-table-column>
-      <el-table-column prop="testtype" label="试验类型"></el-table-column>
-      <el-table-column prop="inspectionsnumber" label="送检数量"></el-table-column>
-      <el-table-column prop="testunit" label="试验单位"></el-table-column>
-      <el-table-column prop="testconclusion" label="试验结论"></el-table-column>
-      <el-table-column prop="failuresnumber" label="失效数量"></el-table-column>
-      <el-table-column prop="eligibilitycriterion" label="合格判据"></el-table-column>
-      <el-table-column prop="measuredvalue" label="实测数值"></el-table-column>
-      <el-table-column prop="failurecause" label="失效模式"></el-table-column>
+      <el-table-column prop="specifiedsamplenumber" label="DPA规定抽样数"></el-table-column>
+      <el-table-column prop="actualamplenumber" label="DPA实际抽样数"></el-table-column>
+      <el-table-column prop="unqualifieditems" label="DPA不合格项目"></el-table-column>
+      <el-table-column prop="unqualifiednumber" label="DPA不合格数量"></el-table-column>
+      <el-table-column prop="testconclusion" label="DPA试验结论"></el-table-column>
+      <el-table-column prop="testunit" label="DPA试验单位"></el-table-column>
+
       <el-table-column prop="qualitygrade" label="质量等级"></el-table-column>
       <el-table-column label="封装形式">
         <template slot-scope="scope">{{ scope.row.packageform }}</template>
       </el-table-column>
       <el-table-column prop="fee" label="费用"></el-table-column>
       <el-table-column prop="primaryclassification" label="一级分类"></el-table-column>
-      <el-table-column prop="processsheetnotes" label="流程单备注"></el-table-column>
+      <el-table-column prop="flowsheetnotes" label="流程单备注"></el-table-column>
       <el-table-column prop="client" label="委托人"></el-table-column>
       <el-table-column prop="status" label="状态"></el-table-column>
       <el-table-column prop="purchasenumber" label="采购编号"></el-table-column>
@@ -99,11 +98,6 @@
 <script>
 export default {
   props: ['tableDatas'],
-  watch: {
-    tableDatas: function (val) {
-      console.log(val)
-    }
-  },
   data () {
     return {
       rateValue: 3.7,
@@ -113,7 +107,7 @@ export default {
       },
       tableData: [
         {
-          id: '101',
+          id: '23',
           createTime: '2020-6-15',
           description: '描述',
           extract: '未抽取',
@@ -121,7 +115,7 @@ export default {
           bank: '未入库'
         },
         {
-          id: '102',
+          id: '324',
           createTime: '2020-6-15',
           description: '描述',
           extract: '未抽取',
@@ -129,7 +123,7 @@ export default {
           bank: '未入库'
         },
         {
-          id: '103',
+          id: '22',
           createTime: '2020-6-15',
           description: '描述',
           extract: '未抽取',

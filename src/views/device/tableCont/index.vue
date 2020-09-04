@@ -3,10 +3,11 @@
     <!-- 左侧菜单 -->
     <div class="side">
       <div class="side-top">
-        <span>隐藏过滤器</span>
-        <span>重置</span>
+        <span @click="visbleSide=!visbleSide">隐藏过滤器</span>
+        <span @click="clearData">重置</span>
       </div>
-      <div class="side-bottom">
+      <div @click="searchAll" style="margin-left:14px;margin-bottom:10px;cursor: pointer;">搜索</div>
+      <div class="side-bottom" v-if="visbleSide">
         <div class="box">
           <div class="title">
             <el-checkbox v-model="van.checked">委托单位</el-checkbox>
@@ -97,23 +98,31 @@
     <!-- 元器件表格 -->
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="复验筛选" name="first">
-        <tableCommon />
+        <tableCommon :tableDatas="tableData" />
       </el-tab-pane>
-      <el-tab-pane label="DPA试验" name="second">DPA试验</el-tab-pane>
+      <el-tab-pane label="DPA试验" name="second">
+        <dpa :tableDatas="tableData" />
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 
 <script>
 import tableCommon from '../tableCommon'
+import dpa from '../dpa'
 import { getTable } from '@/api/collra.js'
 export default {
   components: {
-    tableCommon
+    tableCommon,
+    dpa
   },
   data () {
     return {
-      // 物资编码
+      // 隐藏过滤器
+      visbleSide: true,
+      // 需要传给表格的数据
+      tableData: {},
+      // 委托单位
       van: {
         input: '',
         checked: false
@@ -123,7 +132,7 @@ export default {
         input: '',
         checked: false
       },
-      // 委托单位
+      // 委托shijian
       weituo: {
         timeValue: '',
         checked: false
@@ -190,13 +199,130 @@ export default {
     }
   },
   methods: {
+    // 清空查询
+    clearData () {
+      this.van = {
+        input: '',
+        checked: false
+      }
+      this.cheng = {
+        input: '',
+        checked: false
+      }
+      this.weituo = {
+        timeValue: '',
+        checked: false
+      }
+      this.type = {
+        checked: false,
+        value: '',
+        options: [{
+          value: '选项1',
+          label: '黄金糕'
+        }, {
+          value: '选项2',
+          label: '双皮奶'
+        }, {
+          value: '选项3',
+          label: '蚵仔煎'
+        }, {
+          value: '选项4',
+          label: '龙须面'
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        }]
+      }
+      this.factor = {
+        checked: false,
+        input: ''
+      }
+      this.contry = {
+        checked: false,
+        value: '',
+        options: [{
+          value: '1',
+          label: '国产'
+        }, {
+          value: '2',
+          label: '进口'
+        }]
+      }
+      this.result = {
+        checked: false,
+        value: '',
+        options: [{
+          value: '1',
+          label: '合格'
+        }, {
+          value: '2',
+          label: '不合格'
+        }]
+      }
+      this.fight = {
+        checked: false,
+        input: ''
+      }
+    },
+    searchAll () {
+      this.getTable()
+    },
     handleClick (tab, event) {
       // console.log(tab, event)
     },
+    // 处理请求参数
+    curPam () {
+      const params = {
+
+        entrustedunit: '', // 委托单位
+        componentsname: '', // 元器件名称
+        entrustedtime: '', // 委托时间
+        componentstype: '', // 元器件类型
+        manufacturer: '', // 生产厂家
+        countriesorimports: '', // 国产/进口
+        testconclusion: '', // 试验结论
+        testunit: '' // 试验单位
+
+      }
+      var van = this.van
+      var cheng = this.cheng
+      var weituo = this.weituo
+      var type = this.type
+      var factor = this.factor
+      var contry = this.contry
+      var result = this.result
+      var fight = this.fight
+      if (van.checked) {
+        params.entrustedunit = van.input
+      }
+      if (cheng.checked) {
+        params.componentsname = cheng.input
+      }
+      if (weituo.checked) {
+        params.entrustedtime = weituo.timeValue
+      }
+      if (type.checked) {
+        params.componentstype = type.value
+      }
+      if (factor.checked) {
+        params.manufacturer = factor.input
+      }
+      if (contry.checked) {
+        params.countriesorimports = contry.value
+      }
+      if (result.checked) {
+        params.testconclusion = result.value
+      }
+      if (fight.checked) {
+        params.testunit = fight.input
+      }
+      return params
+    },
     async getTable () {
-      const params = []
+      const params = this.curPam()
       const { data } = await getTable(params)
       console.log(data, '=========')
+      this.tableData = data.data
     }
   },
   created () {
@@ -212,12 +338,13 @@ export default {
   margin-right: 20px;
   margin-bottom: 20px;
   .side {
-    width: 12%;
+    width: 15%;
     margin: 0 20px;
 
     .side-top {
-      text-align: center;
+      text-align: left;
       margin-bottom: 20px;
+      cursor: pointer;
       span {
         margin: 10px;
       }
@@ -244,9 +371,12 @@ export default {
       }
     }
   }
-  .el-tabs {
-    width: 85%;
+  /deep/ .el-tabs {
+    width: 83%;
     box-sizing: border-box;
+    .el-tabs__item {
+      font-size: 16px;
+    }
   }
 }
 </style>
