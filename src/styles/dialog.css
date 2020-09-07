@@ -1,0 +1,41 @@
+.gps /deep/ .el-dialog {
+  border: 1px solid #2a82fe;
+}
+.gps /deep/ .el-dialog .el-button {
+  border-radius: 1px;
+}
+.gps /deep/ .el-dialog .el-dialog__header {
+  border-bottom: 2px solid #2a82fe;
+  height: 46px;
+  line-height: 30px;
+  padding: 10px;
+  background: #cddeff;
+}
+.gps /deep/ .el-dialog .el-dialog__header .el-dialog__headerbtn {
+  top: 15px;
+}
+.gps /deep/ .el-dialog .el-dialog__header .el-dialog__headerbtn .el-dialog__close {
+  color: #2a82fe;
+}
+.gps /deep/ .el-dialog .el-dialog__header .el-dialog__title {
+  color: #2a82fe;
+  line-height: 30px;
+  font-size: 16px;
+}
+.gps /deep/ .el-dialog .el-dialog__body .el-input__icon {
+  color: #2a82fe;
+}
+.gps /deep/ .el-dialog .el-dialog__body .el-input__inner {
+  border: 2px solid #8dbbfc;
+  border-radius: 1px;
+}
+.gps /deep/ .el-dialog .el-dialog__body input::-webkit-input-placeholder {
+  color: #8dbbfc;
+}
+.scrgps .input-with-select {
+  margin-bottom: 20px;
+  width: 350px;
+}
+.scrgps .input-with-select .el-select {
+  width: 100%;
+}

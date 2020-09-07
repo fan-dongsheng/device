@@ -3,18 +3,19 @@ import { lens } from './fisheye.js'
 import axios from 'axios'
 import store from '../../store/index'
 import router from '@/router'
+import { nodeSearch } from '@/api/atlas.js'
 export function dialogNode (params, name) {
   store.commit('val', params)
   store.commit('name', name)
 }
 
 export function pltKg (datases) {
-  // const margin = {
-  //   top: 30,
-  //   right: 30,
-  //   bottom: 5,
-  //   left: 5
-  // }
+  const margin = {
+    top: 30,
+    right: 30,
+    bottom: 5,
+    left: 5
+  }
   // var width = window.sessionStorage.getItem('w') || 800
   var width = document.body.clientWidth
 
@@ -24,7 +25,7 @@ export function pltKg (datases) {
     .domain(d3.range(datases.nodes.labels))
     .range(['#ff9e6d', '#86cbff', '#c2e5a0', '#fff686', '#9e79db'])
 
-  var simulation = window.simulation = d3.forceSimulation()
+  window.simulation = d3.forceSimulation()
     .force('link', d3.forceLink() // This force provides links between nodes,链接力
       .id(d => d.id) // This sets the node id accessor to the specified function. If not specified, will default to the index of a node.
       .distance(150) /* links的长度； */
@@ -40,13 +41,13 @@ export function pltKg (datases) {
   // .force("x", d3.forceX())
   // .force("y", d3.forceY());
 
-  var container = window.container = d3.select('#container')
+  window.container = d3.select('#container')
     .append('svg')
     .attr('width', width)
     .attr('height', height)
     .attr('viewBox', [-width / 2, -height / 2, width, height])
 
-  var svg = window.svg = container
+  window.svg = container
     .append('g')
   // .attr("transform", `translate(${width/2},${height/2})`);
 
@@ -55,19 +56,19 @@ export function pltKg (datases) {
   // The <marker> element defines the graphic that is to be used for drawing arrowheads or polymarkers on a given <path>, <line>, <polyline> or <polygon> element.
   var defs = svg.append('defs')
 
-  // var marker = defs
-  //   .append('marker')
-  //   .attr('viewBox', '-0 -5 10 10')
-  //   .attr('id', 'arrowhead')
-  //   .attr('markerWidth', 10) // marker视窗的宽
-  //   .attr('markerHeight', 10) // marker视窗的高
-  //   .attr('refX', 40) // refX和refY，指的是图形元素和marker连接的位置坐标
-  //   .attr('refY', 0)
-  //   .attr('orient', 'auto') // orient="auto"设置箭头的方向为自动适应线条的方向
-  //   .attr('markerUnits', 'userSpaceOnUse') // marker是否进行缩放 ,默认值是strokeWidth,会缩放
-  //   .append('path')
-  //   .attr('d', 'M 0,-5 L 10 ,0 L 0,5') // 箭头的路径 从 （0,0） 到 （8,4） 到（0,8）
-  //   .attr('fill', '#ffb997')
+  var marker = defs
+    .append('marker')
+    .attr('viewBox', '-0 -5 10 10')
+    .attr('id', 'arrowhead')
+    .attr('markerWidth', 10) // marker视窗的宽
+    .attr('markerHeight', 10) // marker视窗的高
+    .attr('refX', 40) // refX和refY，指的是图形元素和marker连接的位置坐标
+    .attr('refY', 0)
+    .attr('orient', 'auto') // orient="auto"设置箭头的方向为自动适应线条的方向
+    .attr('markerUnits', 'userSpaceOnUse') // marker是否进行缩放 ,默认值是strokeWidth,会缩放
+    .append('path')
+    .attr('d', 'M 0,-5 L 10 ,0 L 0,5') // 箭头的路径 从 （0,0） 到 （8,4） 到（0,8）
+    .attr('fill', '#ffb997')
 
   // defs.append('marker')
   //   .attr("id", 'arrowhead')
@@ -86,7 +87,7 @@ export function pltKg (datases) {
   //   .attr("fill", "#ffb997");
 
   // 3.2 添加多个头像图片的 <pattern>
-  var patterns = window.patterns = defs
+  window.patterns = defs
     .selectAll('pattern.patternclass')
     .data(datases.nodes)
     .enter()
@@ -118,7 +119,7 @@ export function pltKg (datases) {
     .attr('width', 30 * 2)
     .attr('preserveAspectRatio', 'xMidYMin slice')
   /* 图形缩放 */
-  var zoom = window.zoom = d3.zoom() // 自动创建事件侦听器
+  window.zoom = d3.zoom() // 自动创建事件侦听器
     .scaleExtent([0.1, 10]) // 缩放允许的级数
     .on('zoom', zoomed)
 
@@ -157,11 +158,11 @@ export function pltKg (datases) {
     }
   })
   function neigh (a, b) {
-    return a === b || adjlist[a + '-' + b]
+    return a == b || adjlist[a + '-' + b]
   }
 
   /* 控制关系links的样式 */
-  var link = window.link = svg.selectAll('.links')
+  window.link = svg.selectAll('.links')
     .data(dataset.links)
     .enter()
     .append('line')
@@ -182,7 +183,7 @@ export function pltKg (datases) {
   link.append('title')
     .text(d => d.type)
 
-  var edgepaths = window.edgepaths = svg.selectAll('.edgepath') // make path go along with the link provide position for link labels
+  window.edgepaths = svg.selectAll('.edgepath') // make path go along with the link provide position for link labels
     .data(dataset.links)
     .enter()
     .append('path')
@@ -194,7 +195,7 @@ export function pltKg (datases) {
     })
   // .style("pointer-events", "none");
 
-  var edgelabels = window.edgelabels = svg.selectAll('.edgelabel')
+  window.edgelabels = svg.selectAll('.edgelabel')
     .data(dataset.links)
     .enter()
     .append('text')
@@ -230,7 +231,7 @@ export function pltKg (datases) {
   edgelabels.append('title')
     .text(d => d.name)
   /* 实体球的拖拽 */
-  var node = window.node = svg.selectAll('.nodes')
+  window.node = svg.selectAll('.nodes')
     .data(dataset.nodes)
     .enter()
     .append('g')
@@ -308,7 +309,7 @@ export function pltKg (datases) {
       .attr('x2', d => d.target.x)
       .attr('y2', d => d.target.y)
 
-    // const radius = 30
+    const radius = 30
     node.attr('transform', d => 'translate(' + d.x + ',' + d.y + ')')
 
     // node.attr("cx", function(d) {
@@ -344,18 +345,18 @@ export function pltKg (datases) {
   }
 
   // drawing the legend
-  const legendg = container.append('svg').selectAll('.legend')
+  const legend_g = container.append('svg').selectAll('.legend')
     .data(colorScale.domain())
     .enter().append('g')
     .attr('transform', (d, i) => `translate(${width - 150},${i * 20 + 10})`)
 
-  legendg.append('circle')
+  legend_g.append('circle')
     .attr('cx', 0)
     .attr('cy', 0)
     .attr('r', 5)
     .attr('fill', colorScale)
 
-  legendg.append('text')
+  legend_g.append('text')
     .attr('x', 10)
     .attr('y', 5)
     .text(d => d)
@@ -401,8 +402,8 @@ export function pltKg (datases) {
   // 圆环入口,样式,尺寸
   function drawCircle (nd) {
     // Variables
-    // var width1 = 250
-    // var height1 = 250
+    var width1 = 250
+    var height1 = 250
     var radius = 150
 
     // Create primary <g> element
@@ -431,23 +432,23 @@ export function pltKg (datases) {
       .data(root.descendants())
       .enter().append('path')
       .attr('display', function (d) {
-        return d.depth === 1 ? null : 'none'
+        return d.depth == 1 ? null : 'none'
       })
       .attr('d', arc)
       // .attr("fill-opacity", 0.8)
       .style('fill', function (d) {
-        return d.depth === 1 ? '#F0F6FE' : '#45A5EF'
+        return d.depth == 1 ? '#F0F6FE' : '#45A5EF'
       })
       .attr('class', function (d) {
-        return d.depth === 2 ? 'hiddenUp' : null
+        return d.depth == 2 ? 'hiddenUp' : null
       })
       .style('opacity', function (d) {
-        return d.depth === 2 ? 0.7 : 1
+        return d.depth == 2 ? 0.7 : 1
       })
       .style('cursor', 'pointer')
       .on('mouseenter', function (d) {
         d3.select(this).style('fill', function (d) {
-          return d.depth === 1 ? '#F0F6F0' : '#45A5B0'
+          return d.depth == 1 ? '#F0F6F0' : '#45A5B0'
         })
         const dd = d.children
         path
@@ -461,13 +462,13 @@ export function pltKg (datases) {
       })
       .on('mouseleave', function (d) {
         d3.select(this).style('fill', function (d) {
-          return d.depth === 1 ? '#F0F6FE' : '#45A5EF'
+          return d.depth == 1 ? '#F0F6FE' : '#45A5EF'
         })
       })
       .on('mouseover', function (d) {
         const showed = d3.selectAll('.showUp')
         if (!showed.empty()) {
-          if (showed.datum().parent.children.indexOf(d) === -1 && d.data.name !== showed.datum().parent.data.name) {
+          if (showed.datum().parent.children.indexOf(d) == -1 && d.data.name !== showed.datum().parent.data.name) {
             d3.selectAll('.showUp')
               .attr('display', 'none')
               .attr('class', 'hiddenUp')
@@ -571,8 +572,8 @@ export function pltKg (datases) {
       })
       .attr('text-anchor', 'middle')
       .attr('dominant-baseline', 'central')
-      .attr('class', d => d.depth > 0 ? (d.depth === 1 ? 'iconfont' : 'hidUp') : null)
-      .attr('display', d => d.depth > 0 ? (d.depth === 1 ? null : 'none') : null)
+      .attr('class', d => d.depth > 0 ? (d.depth == 1 ? 'iconfont' : 'hidUp') : null)
+      .attr('display', d => d.depth > 0 ? (d.depth == 1 ? null : 'none') : null)
       // .attr('style', "color:#ff00ff;")
       .attr('font-size', '10px')
       .style('cursor', 'pointer')
@@ -592,13 +593,13 @@ export function pltKg (datases) {
 
     iconsLab.on('mouseenter', function (d) {
       const dd = d
-      path.filter(d => dd === d).style('fill', function (d) { return d.depth === 1 ? '#F0F6F0' : '#45A5B0' })
+      path.filter(d => dd == d).style('fill', function (d) { return d.depth == 1 ? '#F0F6F0' : '#45A5B0' })
     })
       .on('mouseleave', function (d) {
         const ddd = d
-        path.filter(d => ddd === d)
+        path.filter(d => ddd == d)
           .style('fill', function (d) {
-            return d.depth === 1 ? '#F0F6FE' : '#45A5EF'
+            return d.depth == 1 ? '#F0F6FE' : '#45A5EF'
           })
       })
 
@@ -688,10 +689,10 @@ export function pltKg (datases) {
   }
 
   // 鼠标位置,获取画布坐标
-  // function printPosition () {
-  //   var position = d3.mouse(svg.node())
-  //   return position
-  // }
+  function printPosition () {
+    var position = d3.mouse(svg.node())
+    return position
+  }
 
   function stopForce () {
     node.each((val) => {
@@ -719,10 +720,10 @@ export function pltKg (datases) {
     const newLinks = []
     var index = nd.id
     node.each((o) => {
-      return index === o.id ? null : newNodes.push(o)
+      return index == o.id ? null : newNodes.push(o)
     })
     link.each((o) => {
-      return o.source.id === index || o.target.id === index ? null : newLinks.push(o)
+      return o.source.id == index || o.target.id == index ? null : newLinks.push(o)
     })
     dataset = { nodes: newNodes, links: newLinks }
     //
@@ -778,7 +779,7 @@ export function pltKg (datases) {
     function findChild (data, id) {
       data.forEach((item) => {
         if (typeof item.source === 'object') {
-          if (item.source.id === id) {
+          if (item.source.id == id) {
             childLinkList.push(item.index)
             childNodeList.push(item.target.id)
             id = item.target.id
@@ -787,12 +788,12 @@ export function pltKg (datases) {
             findChild(data, id)
           }
         } else {
-          if (item.source === id) {
+          if (item.source == id) {
             childLinkList.push(item.index)
             childNodeList.push(item.target)
             id = item.target
-            var s = data.indexOf(item)
-            data.splice(s, 1)
+            var t = data.indexOf(item)
+            data.splice(t, 1)
             findChild(data, id)
           }
         }
@@ -809,7 +810,7 @@ export function pltKg (datases) {
       }
 
       link.each((o) => {
-        return o.source.id === val || o.target.id === val ? newLinks.push(o) : null
+        return o.source.id == val || o.target.id == val ? newLinks.push(o) : null
       })
     })
     const temLink = dataset.links
@@ -849,10 +850,10 @@ export function pltKg (datases) {
       return neigh(index, o.id) ? 1 : 0.1
     })
     edgelabels.attr('display', function (o) {
-      return o.source.id === index || o.target.id === index ? 'block' : 'none'
+      return o.source.id == index || o.target.id == index ? 'block' : 'none'
     })
     link.style('opacity', function (o) {
-      return o.source.id === index || o.target.id === index ? 1 : 0.1
+      return o.source.id == index || o.target.id == index ? 1 : 0.1
     })
   }
 
@@ -884,7 +885,7 @@ export function pltKg (datases) {
     function findChild (data, id) {
       data.forEach((item) => {
         if (typeof item.source === 'object') {
-          if (item.source.id === id) {
+          if (item.source.id == id) {
             childLinkList.push(item.index)
             childNodeList.push(item.target.id)
             id = item.target.id
@@ -893,12 +894,12 @@ export function pltKg (datases) {
             findChild(data, id)
           }
         } else {
-          if (item.source === id) {
+          if (item.source == id) {
             childLinkList.push(item.index)
             childNodeList.push(item.target)
             id = item.target
-            var s = data.indexOf(item)
-            data.splice(s, 1)
+            var t = data.indexOf(item)
+            data.splice(t, 1)
             findChild(data, id)
           }
         }
@@ -909,7 +910,7 @@ export function pltKg (datases) {
     function findParent (data, id) {
       data.forEach((item) => {
         if (typeof item.source === 'object') {
-          if (item.target.id === id) {
+          if (item.target.id == id) {
             PnameList.push(item.source.name)
             parentLinkList.push(item.index)
             parentNodeList.push(item.source.id)
@@ -918,13 +919,13 @@ export function pltKg (datases) {
             data.splice(t, 1)
             findParent(data, id)
           } else {
-            if (item.target === id) {
+            if (item.target == id) {
               PnameList.push(item.source.name)
               parentLinkList.push(item.index)
               parentNodeList.push(item.source)
               id = item.source
-              var s = data.indexOf(item)
-              data.splice(s, 1)
+              var t = data.indexOf(item)
+              data.splice(t, 1)
               findParent(data, id)
             }
           }
@@ -935,7 +936,7 @@ export function pltKg (datases) {
     const nodeList = parentNodeList.concat(childNodeList)
     const linkList = parentLinkList.concat(childLinkList)
     node.style('opacity', function (o) {
-      return nodeList.indexOf(o.id) > -1 || o.id === ind ? 1 : 0.1
+      return nodeList.indexOf(o.id) > -1 || o.id == ind ? 1 : 0.1
     })
     edgelabels.attr('display', function (o) {
       return linkList.indexOf(o.index) > -1 ? 'block' : 'none'
@@ -947,10 +948,10 @@ export function pltKg (datases) {
 
   // 显示链路、直接相连、普通模式
   node.on('mouseover', (d) => {
-    return showModel === 0 ? null : (showModel === 1 ? focus(d) : focusLink(d))
+    showModel == 0 ? null : (showModel == 1 ? focus(d) : focusLink(d))
   })
     .on('mouseout', (d) => {
-      return showModel === 0 ? null : unfocus(d)
+      showModel == 0 ? null : unfocus(d)
     })
 
   d3.select('#deleteG').on('mouseup', function () {
@@ -978,35 +979,36 @@ export function pltKg (datases) {
     return false
   }
   // 条件拓展
-  // function reExtendNode () {
-  //   axios.get(`http://localhost:8023/MapDisplay/extensionNodes?node=${this.$store.state.name}&edge=${this.$store.state.relation}`)
-  //     .then(res => {
-  //       const comData = res.data
-  //       var arrEdges = []; var arrNodes = []
+  function reExtendNode () {
+    axios.get(`http://localhost:8023/MapDisplay/extensionNodes?node=${this.$store.state.name}&edge=${this.$store.state.relation}`)
+      .then(res => {
+        const comData = res.data
+        var arrEdges = []; var arrNodes = []
 
-  //       for (let i = 0; i < comData.nodes.length; i++) {
-  //         if (!isInArray(datases.nodes, comData.nodes[i].name)) {
-  //           arrNodes.push(comData.nodes[i])
-  //         }
-  //       }
+        for (let i = 0; i < comData.nodes.length; i++) {
+          if (!isInArray(datases.nodes, comData.nodes[i].name)) {
+            arrNodes.push(comData.nodes[i])
+          }
+        }
 
-  //       for (let i = 0; i < comData.links.length; i++) {
-  //         const obj2 = comData.links[i]
-  //         if (!EdgeIsInArray(datases.links, comData.links[i])) {
-  //           arrEdges.push(obj2)
-  //         }
-  //       }
+        for (let i = 0; i < comData.links.length; i++) {
+          const obj2 = comData.links[i]
+          if (!EdgeIsInArray(datases.links, comData.links[i])) {
+            arrEdges.push(obj2)
+          }
+        }
 
-  //       dataset = { nodes: datases.nodes.concat(arrNodes), links: datases.links.concat(arrEdges) }
+        dataset = { nodes: datases.nodes.concat(arrNodes), links: datases.links.concat(arrEdges) }
 
-  //       d3.selectAll('svg').remove()
-  //       pltKg(dataset)
-  //     }
-  //     )
-  // }
+        d3.selectAll('svg').remove()
+        pltKg(dataset)
+      }
+      )
+  }
   // 拓展
   function myExtendNode (name) {
-    axios.get('http://localhost:8023/MapDisplay/subGraph?nodeName=' + name)
+    nodeSearch({ nodeName: name })
+      // axios.get('http://localhost:8023/MapDisplay/subGraph?nodeName=' + name)
       .then(res => {
         const comData = res.data
         var arrEdges = []; var arrNodes = []
@@ -1046,7 +1048,7 @@ export function magLens (ob) {
     var fisheye = lens().circular()
       .radius(100)
       .distortion(5)
-    var container = window.container
+
     var glass = container.append('circle')
       .attr('class', 'glass')
       .attr('r', fisheye.radius())
@@ -1059,7 +1061,6 @@ export function magLens (ob) {
     window.container.on('mousemove', function () {
       const pointer = d3.mouse(this)
       // console.log(svg.attr("transform"))
-      var svg = window.svg
       if (svg.attr('transform')) {
         const tran = getXYFromTranslate(svg)
         fisheye.focus([(pointer[0] - tran[0]) / tran[2], (pointer[1] - tran[1]) / tran[2]])
@@ -1069,7 +1070,7 @@ export function magLens (ob) {
       }
       var mouseX = d3.mouse(this)[0]
       var mouseY = d3.mouse(this)[1]
-      // var r = fisheye.radius()
+      var r = fisheye.radius()
 
       glass.attr('cx', mouseX)
         .attr('cy', mouseY)
@@ -1140,19 +1141,44 @@ export function magLens (ob) {
   }
 }
 /* 节点定位 */
-// export function locateNode (nodeName) {
-//   const nodeNameList = []
+export function locateNode (nodeName) {
+  const nodeNameList = []
 
-//   node.each((val) => {
-//     nodeNameList.push(val.name)
-//   })
-//   const finded = nodeNameList.indexOf(nodeName) > -1
-//   if (finded) {
-//     node.style('opacity', function (o) {
-//       return o.name == nodeName ? 1 : 0.1
-//     })
-//     edgelabels.attr('display', 'none')
-//     link.style('opacity', 0.1)
-//   }
-//   return finded
-// }
+  node.each((val) => {
+    nodeNameList.push(val.name)
+  })
+
+  function querySearch (queryString) {
+    var nodeNameLists = nodeNameList
+    var results = queryString ? nodeNameLists.filter(createFilter(queryString)) : nodeNameLists
+    return results
+  }
+  function createFilter (queryString) {
+    return (restaurant) => {
+      return (restaurant.toLowerCase().indexOf(queryString.toLowerCase()) > -1)
+    }
+  }
+  var aaa = querySearch(nodeName)
+  console.log(aaa)
+  node.style('opacity', function (o) {
+    return aaa.indexOf(o.name) > -1 ? 1 : 0.1
+  })
+
+  edgelabels.attr('display', 'none')
+  link.style('opacity', 0.1)
+
+  // var nodelist=nodeNameList.filter()
+  //  nodeNameList.filter(element => {
+
+  //   let finded =element.indexOf(nodeName) > -1 ? true : false
+  //   if (finded) {
+  //     node.style("opacity", function (o) {
+  //       return o.name == element ? 1 : 0.1;
+  //     });
+  //     edgelabels.attr("display", "none");
+  //     link.style("opacity", 0.1);
+  //   }
+  // });
+
+  return finded
+}

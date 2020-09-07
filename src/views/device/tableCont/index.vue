@@ -6,7 +6,12 @@
         <span @click="visbleSide=!visbleSide">隐藏过滤器</span>
         <span @click="clearData">重置</span>
       </div>
-      <div @click="searchAll" style="margin-left:14px;margin-bottom:10px;cursor: pointer;">搜索</div>
+      <el-button
+        type="primary"
+        size="small"
+        @click="searchAll"
+        style="margin-left:10px;margin-bottom:10px;cursor: pointer;"
+      >搜索</el-button>
       <div class="side-bottom" v-if="visbleSide">
         <div class="box">
           <div class="title">
