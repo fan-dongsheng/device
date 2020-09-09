@@ -273,7 +273,7 @@ export default {
       this.getTable()
     },
     handleClick (tab, event) {
-      // console.log(tab, event)
+      console.log(tab, event)
     },
     // 处理请求参数
     curPam () {
