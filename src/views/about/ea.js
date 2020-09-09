@@ -518,16 +518,10 @@ export function echartsOne (name, data, secret) {
 export function LeiBie (name, data, secret) {
   var arr = [];
   var lx = [];
-  // debugger;
   for (var i = 0; i < data.length; i++) {
     if (lx.indexOf(data[i].NAME) == -1) {
       lx.push(data[i].NAME);
     }
-    // var array={
-    // 	name:data[i].name,
-    // 	value:data[i].value
-    // }
-    // arr.push(array);
   }
   for (var i = 0; i < lx.length; i++) {
     var value = 0;
@@ -552,16 +546,17 @@ export function LeiBie (name, data, secret) {
     color: ['rgba(49,197,197,0.8)', 'rgba(182,162,223,0.8)', 'rgba(214,112,112,0.8)', 'rgba(254,185,128,0.8)', 'rgba(85,179,240,0.8)'],
     title: {
       text: '复验筛选按类别统计分布',
-      subtext: commonSubTitle,
-      top: 10,
+      // subtext: commonSubTitle,
+      top: 2,
       left: 10,
       textStyle: {
-        color: '#333',
+        color: '#fff',
         fontSize: 15,
       },
+      padding: [0, 0],
       subtextStyle: {
         fontSize: 15,
-        color: '#666'
+        color: '#fff'
       },
     },
     legend: {
@@ -569,7 +564,7 @@ export function LeiBie (name, data, secret) {
       show: true,
       bottom: 0,
       textStyle: {
-        color: "#333"
+        color: "#fff"
       },
       data: arr
     },
@@ -847,11 +842,11 @@ export function EacHFn1 (name, data, secret) {
       subtext: commonSubTitle,
       subtextStyle: {
         fontSize: 15,
-        color: '#666',
+        color: '#fff',
       },
       padding: [0, 0],
       textStyle: {
-        color: '#333',
+        color: '#fff',
         fontSize: 13,
         align: 'center'
       },
@@ -868,7 +863,7 @@ export function EacHFn1 (name, data, secret) {
       // data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎'],
       data: arr,
       textStyle: {                 //----图例内容样式
-        color: '#333',               //---所有图例的字体颜色
+        color: '#fff',               //---所有图例的字体颜色
         //backgroundColor:'black',  //---所有图例的字体背景色
         fontSize: 11
       }
@@ -930,20 +925,20 @@ export function EacHFn2 (name, data, secret) {
     commonSubTitle = secret + commonSubTitleStar;
   }
   var myChart = echarts.init(document.getElementById(name));
-  option = {
+  var option = {
     color: ['#A0CE3A', '#31C5C0', '#1E9BD1', '#0F347B', '#585247', '#7F6AAD', '#009D85', "rgba(250,250,250,0.3)"],
     title: {
       text: '复验筛选质量等级分布',
       top: 10,
       left: 10,
-      subtext: commonSubTitle,
+      // subtext: commonSubTitle,
       textStyle: {
-        color: '#333',
+        color: '#fff',
         fontSize: 15,
       },
       subtextStyle: {
         fontSize: 15,
-        color: '#666',
+        color: '#fff',
       },
     },
     legend: {
@@ -951,7 +946,7 @@ export function EacHFn2 (name, data, secret) {
       show: true,
       bottom: 0,
       textStyle: {
-        color: "#333"
+        color: "#fff"
       },
       data: arr
     },

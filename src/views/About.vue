@@ -28,7 +28,7 @@
     </div>
     <div class="middle">
       <div class="m-top">
-        <div class="title">复验筛选按类别统计分布</div>
+        <!-- <div class="title">复验筛选按类别统计分布</div> -->
         <div class="charts"></div>
         <div class="img-b1"></div>
         <div class="img-b2"></div>
@@ -38,7 +38,7 @@
         <aboutEchartsMt />
       </div>
       <div class="m-middle">
-        <div class="title">复验筛选质量等级分布</div>
+        <!-- <div class="title">复验筛选质量等级分布</div> -->
         <div class="charts"></div>
         <div class="img-b1"></div>
         <div class="img-b2"></div>
@@ -47,7 +47,7 @@
         <aboutEchartsMm />
       </div>
       <div class="m-bottom">
-        <div class="title">DPA不合格按元器件类型分类</div>
+        <!-- <div class="title">DPA不合格按元器件类型分类</div> -->
         <div class="charts"></div>
         <div class="img-b1"></div>
         <div class="img-b2"></div>
@@ -108,7 +108,7 @@ export default {
 <style lang="less" scoped>
 @border: 2px solid #4e80b7;
 @padding:10px 6px;
-@mi-padding: 20px;
+@mi-padding: 15px;
 .img-com1 {
   position: absolute;
   top: -3px;
@@ -275,6 +275,7 @@ export default {
       margin-bottom: 10px;
     }
     .m-top {
+      box-sizing: border-box;
       flex: 1;
       border: @border;
       padding: @mi-padding;

@@ -1,11 +1,10 @@
 <template>
   <div class="aboutEchartsMt">
-    <div id="main" style="width: 600px;height:400px;"></div>
+    <div id="main" style="width: 500px;height:220px;"></div>
   </div>
 </template>
 
 <script>
-import echarts from 'echarts'
 import { LeiBie } from './ea.js'
 export default {
   data () {
