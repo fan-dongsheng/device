@@ -31,12 +31,15 @@
       <!-- 复验筛选不合格器件按国产进口比例统计 -->
       <div id="PaiXu" style="width: 100%;height:100%;" v-show="active==0"></div>
       <div id="EacHFn1" style="width: 100%;height:100%;" v-show="active==1"></div>
+      <div id="echartsOne" style="width: 100%;height:100%;" v-show="active==2"></div>
+      <div id="PaiXu2" style="width: 100%;height:100%;" v-show="active==3"></div>
+      <div id="PaiXu3" style="width: 100%;height:100%;" v-show="active==4"></div>
     </div>
   </div>
 </template>
 
 <script>
-import { PaiXu, EacHFn1 } from './ea'
+import { PaiXu, EacHFn1, echartsOne, PaiXu2, PaiXu3 } from './ea'
 
 export default {
   data () {
@@ -58,7 +61,7 @@ export default {
         }
       ],
       //复验筛选不合格器件按器件类别统计
-      datasTwo: [
+      datasOne: [
         {
           NAME: '集成电路',
           VALUE: 31,
@@ -71,18 +74,72 @@ export default {
           TIME: '202001',
           SECRET: null
         },
-      ]
+      ],
+      //复验筛选不合格器件按元器件类型类别统计
+      datasTwo: [
+        {
+          NAME: '半导体',
+          GC: 36,
+          JK: 24,
+          TIME: '202001',
+          SECRET: null
+        },
+      ],
+      //复验筛选不合格按生产厂家出现次数排序
+      datasThree: [
+        {
+          YQJMC: '三极管',
+          WTDW: '上海',
+          BHGSL: 10,
+          PM: '1',
+          F_GUOCHANJINKOU: '国产',
+          SECRET: null
+        },
+      ],
+      // 复验筛选不合格占比（%）按生产厂家排序
+      datasFour: [
+        {
+          YQJMC: '三极管',
+          WTDW: '上海',
+          BHGSL: 10,
+          BL: '1',
+          F_GUOCHANJINKOU: '国产',
+          SECRET: null
+        },
+      ],
     }
   },
   methods: {
     activeTle (index) {
       this.active = index
       if (index == 1) {
-        EacHFn1('EacHFn1', this.datasTwo, null)
+        this.$nextTick(function () {
+          //用来解决数据不更新问题
+          EacHFn1('EacHFn1', this.datasOne, null)
+        });
+
+      } else if (index == 2) {
+        this.$nextTick(function () {
+          //用来解决数据不更新问题
+          echartsOne('echartsOne', this.datasTwo, null)
+        });
+      }
+      else if (index == 3) {
+        this.$nextTick(function () {
+          //用来解决数据不更新问题
+          PaiXu2('PaiXu2', this.datasThree, '国产', null)
+        });
+      }
+      else if (index == 4) {
+        this.$nextTick(function () {
+          //用来解决数据不更新问题
+          PaiXu3('PaiXu3', this.datasFour, null)
+        });
       }
     }
   },
   mounted () {
+
     PaiXu('PaiXu', this.datas, null)
 
   }

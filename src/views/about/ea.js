@@ -155,11 +155,11 @@ export function PaiXu (name, data, secret) {
       data: arr
     }]
   };
-  myChart.setOption(option);
+  myChart.setOption(option, true);
 }
 
 // 复验筛选不合格占比（%）按生产厂家排序
-export function PaiXu3 (name, data) {
+export function PaiXu3 (name, data, secret) {
   var commonSubTitle = "机密★";
   var commonSubTitleStar = "★";
   if (secret) {
@@ -282,24 +282,24 @@ export function PaiXu3 (name, data) {
     }
   };
 
-  option = {
+  var option = {
     title: {
       text: '复验筛选不合格占比（%）按生产厂家排序',
       left: 'center',
       bottom: '10',
-      subtext: commonSubTitle,
-      subtextStyle: {
-        fontSize: 15,
-        color: '#666',
-      },
+      // subtext: commonSubTitle,
+      // subtextStyle: {
+      //   fontSize: 15,
+      //   color: '#666',
+      // },
       padding: [0, 0],
       textStyle: {
-        color: '#333',
+        color: '#fff',
         fontSize: 13,
         align: 'center'
       },
     },
-    backgroundColor: '#f9f9f9',
+    // backgroundColor: '#f9f9f9',
     color: ['rgb(197,73,249)', '#006699', 'rgb(32,220,237)'],
     tooltip: {
       trigger: 'axis',
@@ -323,6 +323,12 @@ export function PaiXu3 (name, data) {
           show: true,
           textStyle: {
             color: 'white'
+          }
+        },
+        axisLine: {
+          // show:false,
+          lineStyle: {
+            color: '#fff'
           }
         }
       }
@@ -396,19 +402,20 @@ export function echartsOne (name, data, secret) {
   }
   var myChart = echarts.init(document.getElementById(name));
   myChart.clear()
-  option = {
+  var option = {
     title: {
-      text: '复验筛选不合格按元器件类型分布',
-      left: 'center',
-      subtext: commonSubTitle,
-      subtextStyle: {
-        fontSize: 15,
-        color: '#666',
-      },
+      text: '复验筛选不合格按元器件类型统计',
+      left: 10,
+      top: 10,
+      // subtext: commonSubTitle,
+      // subtextStyle: {
+      //   fontSize: 15,
+      //   color: '#666',
+      // },
       bottom: '0',
       padding: [0, 0],
       textStyle: {
-        color: '#333',
+        color: '#FFF',
         fontSize: 13,
         align: 'center'
       },
@@ -417,11 +424,12 @@ export function echartsOne (name, data, secret) {
       name: [],
       data: ["国产", "进口"],
       textStyle: {
-        color: '#333',
+        color: '#fff',
         fontSize: 15,
       },
+      top: 5,
     },
-    backgroundColor: '#f9f9f9',
+    // backgroundColor: '#f9f9f9',
     // tooltip（提示框组件）
     tooltip: {
       //trigger(触发类型)，可选'item','axis','none'
@@ -437,8 +445,8 @@ export function echartsOne (name, data, secret) {
       data: dataX,
       axisLabel: {
         show: true,
-        color: '#333',
-        fontSize: 20,
+        color: '#fff',
+        fontSize: 16,
       },
       splitLine: {
         show: false
@@ -446,7 +454,7 @@ export function echartsOne (name, data, secret) {
       axisLine: {
         // show:false,
         lineStyle: {
-          color: '#333',
+          color: '#fff',
         }
       },
       axisTick: {
@@ -456,23 +464,40 @@ export function echartsOne (name, data, secret) {
     },
     yAxis: [
       {
-        name: '国产/进口数量',
+        name: '国\n产\n/\n进\n口\n数\n量',
         type: 'value',
+        //坐标轴名称位置
+        nameLocation: 'left',
+        //坐标轴名称与轴线之间的距离。
+        nameGap: 0,
+        //坐标轴名称样式
+        nameTextStyle: {
+          fontSize: 14,
+          padding: [200, 100, -30, 0]
+        },
         //axisTick 坐标轴刻度相关设置
         axisTick: {
-          show: true
+          show: false
         },
         //axixLine 坐标轴轴线相关设置
         axisLine: {
+          show: false,
           lineStyle: {
-            color: '#333',
+            color: '#fff',
+          }
+        },
+        //y轴图例北京线条
+        splitLine: {
+          show: true,
+          lineStyle: {
+            color: '#3C6FAC',
           }
         },
         //axisLabel 坐标轴刻度标签的相关设置
         axisLabel: {
           show: true,
-          color: '#333',
-          fontSize: 20
+          color: '#fff',
+          fontSize: 16
         }
       },
     ],
@@ -716,30 +741,30 @@ export function PaiXu2 (name, data, name1, secret) {
       fontSize: 11,
       rich: {
         name: {
-          textBorderColor: '#333'
+          textBorderColor: '#fff'
         }
       }
     }
   };
 
-  option = {
+  var option = {
     title: {
       text: '复验筛选不合格按生产厂家出现次数排序',
       left: 'center',
-      subtext: commonSubTitle,
-      subtextStyle: {
-        fontSize: 15,
-        color: '#666',
-      },
+      // subtext: commonSubTitle,
+      // subtextStyle: {
+      //   fontSize: 15,
+      //   color: '#666',
+      // },
       bottom: '0',
       padding: [0, 0],
       textStyle: {
-        color: '#333',
+        color: '#fff',
         fontSize: 13,
         align: 'center'
       },
     },
-    backgroundColor: '#f9f9f9',
+    // backgroundColor: '#f9f9f9',
     color: ['rgb(197,73,249)', '#006699', 'rgb(32,220,237)'],
     tooltip: {
       trigger: 'axis',
@@ -764,7 +789,14 @@ export function PaiXu2 (name, data, name1, secret) {
           textStyle: {
             color: 'white'
           }
+        },
+        axisLine: {
+          // show:false,
+          lineStyle: {
+            color: '#fff'
+          }
         }
+
       }
     ],
     yAxis: [
@@ -893,7 +925,7 @@ export function EacHFn1 (name, data, secret) {
     ]
   };
 
-  myChart.setOption(option);
+  myChart.setOption(option, true);
 }
 
 // 复检筛选按质量等级分布
