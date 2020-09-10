@@ -1,6 +1,6 @@
 <template>
   <div class="aboutEchartsMm">
-    <div id="EacHFn2" style="width: 500px;height:220px;"></div>
+    <div id="EacHFn2" style="width: 100%;height:100%;"></div>
   </div>
 </template>
 
@@ -31,5 +31,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
+.aboutEchartsMm {
+  height: 100%;
+}
 </style>

@@ -92,22 +92,22 @@ export function PaiXu (name, data, secret) {
   }
   var myChart = echarts.init(document.getElementById(name));
   var span = '40%'   //span 饼图环化程度  0%-100%  0%实心 --非必选参数
-  option = {
-    backgroundColor: '#f9f9f9',
+  var option = {
+    // backgroundColor: '#f9f9f9',
     title: {
-      text: 'DPA不合格按国产/进口比例统计',
-      subtext: commonSubTitle,
-      left: 'center',
-      bottom: '2',
+      text: '复验筛选不合格器件按国产进口比例统计',
+      // subtext: commonSubTitle,
+      left: 10,
+      top: 0,
       padding: [24, 0],
       textStyle: {
-        color: '#333',
-        fontSize: 12,
+        color: '#fff',
+        fontSize: 14,
         align: 'center'
       },
       subtextStyle: {
         fontSize: 15,
-        color: '#666',
+        color: '#fff',
       }
     },
     tooltip: {
@@ -122,9 +122,9 @@ export function PaiXu (name, data, secret) {
     legend: {
       orient: 'horizontal',
       show: true,
-      top: 0,
+      bottom: 20,
       textStyle: {
-        color: "#333"
+        color: "#fff"
       },
       data: arr
     },
@@ -148,7 +148,7 @@ export function PaiXu (name, data, secret) {
           borderRadius: 4,
           padding: [0, -50],
           textStyle: {
-            fontSize: 20
+            fontSize: 16
           }
         }
       },
@@ -832,18 +832,18 @@ export function EacHFn1 (name, data, secret) {
     commonSubTitle = secret + commonSubTitleStar;
   }
   var myChart = echarts.init(document.getElementById(name));
-  option = {
+  var option = {
     color: ['rgba(49,197,197,0.8)', 'rgba(182,162,223,0.8)', 'rgba(214,112,112,0.8)', 'rgba(254,185,128,0.8)', 'rgba(85,179,240,0.8)'],
-    backgroundColor: '#f9f9f9',
+    // backgroundColor: '#f9f9f9',
     title: {
       text: '复验筛选不合格器件按器件类别统计',
       left: 'center',
       bottom: '10',
-      subtext: commonSubTitle,
-      subtextStyle: {
-        fontSize: 15,
-        color: '#fff',
-      },
+      // subtext: commonSubTitle,
+      // subtextStyle: {
+      //   fontSize: 15,
+      //   color: '#fff',
+      // },
       padding: [0, 0],
       textStyle: {
         color: '#fff',

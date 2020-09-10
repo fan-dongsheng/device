@@ -27,21 +27,64 @@
         </div>
       </div>
     </div>
-    <div class="right">2</div>
+    <div class="right">
+      <!-- 复验筛选不合格器件按国产进口比例统计 -->
+      <div id="PaiXu" style="width: 100%;height:100%;" v-show="active==0"></div>
+      <div id="EacHFn1" style="width: 100%;height:100%;" v-show="active==1"></div>
+    </div>
   </div>
 </template>
 
 <script>
+import { PaiXu, EacHFn1 } from './ea'
+
 export default {
   data () {
     return {
-      active: 99
+      active: 0,
+      //复验筛选不合格器件按国产进口比例统计
+      datas: [
+        {
+          NAME: '国产',
+          VALUE: 31,
+          TIME: '202001',
+          SECRET: null
+        },
+        {
+          NAME: '进口',
+          VALUE: 20,
+          TIME: '202001',
+          SECRET: null
+        }
+      ],
+      //复验筛选不合格器件按器件类别统计
+      datasTwo: [
+        {
+          NAME: '集成电路',
+          VALUE: 31,
+          TIME: '202001',
+          SECRET: null
+        },
+        {
+          NAME: '半导体分立器件',
+          VALUE: 20,
+          TIME: '202001',
+          SECRET: null
+        },
+      ]
     }
   },
   methods: {
     activeTle (index) {
       this.active = index
+      if (index == 1) {
+        EacHFn1('EacHFn1', this.datasTwo, null)
+      }
     }
+  },
+  mounted () {
+    PaiXu('PaiXu', this.datas, null)
+
   }
 }
 </script>
