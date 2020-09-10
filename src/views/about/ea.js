@@ -267,7 +267,7 @@ export function PaiXu3 (name, data, secret) {
       // distance: myChart.config.distance,
       // align: myChart.config.align,
       // verticalAlign: myChart.config.verticalAlign,
-      rotate: myChart.config.rotate,
+      rotate: 0,
       formatter: function (params) {
         // console.log(params)
 
@@ -732,7 +732,7 @@ export function PaiXu2 (name, data, name1, secret) {
       // distance: myChart.config.distance,
       // align: myChart.config.align,
       // verticalAlign: myChart.config.verticalAlign,
-      rotate: myChart.config.rotate,
+      rotate: 0,
       formatter: function (params) {
         // console.log(params)
 

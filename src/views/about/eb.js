@@ -67,7 +67,7 @@ function h3_text (data, year, month, year1, month1) {
 
 }
 //DPA试验按器件类型统计
-function eCharts1 (name, data, secret) {
+export function eCharts1 (name, data, secret) {
   var myChart = echarts.init(document.getElementById(name));
   var commonSubTitle = "机密★";
   var commonSubTitleStar = "★";
@@ -98,21 +98,21 @@ function eCharts1 (name, data, secret) {
   // myChart.clear();
   var scale = 1;
 
-  option = {
-    backgroundColor: '#f9f9f9',
+  var option = {
+    // backgroundColor: '#f9f9f9',
     title: {
       text: 'DPA试验量按器件类型统计',
-      left: 'center',
-      bottom: '2',
-      subtext: commonSubTitle,
-      subtextStyle: {
-        fontSize: 15,
-        color: '#666',
-      },
+      left: 10,
+      top: '2',
+      // subtext: commonSubTitle,
+      // subtextStyle: {
+      //   fontSize: 15,
+      //   color: '#666',
+      // },
       padding: [24, 0],
       textStyle: {
-        color: '#333',
-        fontSize: 12 * scale,
+        color: '#fff',
+        fontSize: 14 * scale,
         align: 'center'
       }
     },
@@ -146,7 +146,7 @@ function eCharts1 (name, data, secret) {
 }
 
 // DPA不合格按国产/进口比例统计
-function eCharts2 (name, data, secret) {
+export function eCharts2 (name, data, secret) {
   var myChart = echarts.init(document.getElementById(name));
   var commonSubTitle = "机密★";
   var commonSubTitleStar = "★";
@@ -176,24 +176,24 @@ function eCharts2 (name, data, secret) {
   var myChart = echarts.init(document.getElementById(name));
 
   let span = '40%' //span 饼图环化程度  0%-100%  0%实心 --非必选参数
-  option = {
+  var option = {
     title: {
       text: 'DPA不合格按国产/进口比例统计',
       left: 'center',
       bottom: '10',
-      subtext: commonSubTitle,
-      subtextStyle: {
-        fontSize: 15,
-        color: '#666',
-      },
+      // subtext: commonSubTitle,
+      // subtextStyle: {
+      //   fontSize: 15,
+      //   color: '#666',
+      // },
       padding: [24, 0],
       textStyle: {
-        color: '#333',
-        fontSize: 12,
+        color: '#fff',
+        fontSize: 14,
         align: 'center'
       }
     },
-    backgroundColor: '#f9f9f9',
+    // backgroundColor: '#f9f9f9',
     tooltip: {
       trigger: 'item',
       // {a}：系列名。
@@ -242,7 +242,7 @@ function eCharts2 (name, data, secret) {
 }
 
 // DPA不合格按元器件类别分布
-function eCharts3 (name, data, secret) {
+export function eCharts3 (name, data, secret) {
   var myChart = echarts.init(document.getElementById(name));
   var commonSubTitle = "机密★";
   var commonSubTitleStar = "★";
@@ -302,20 +302,20 @@ function eCharts3 (name, data, secret) {
       height: 0,
     }
   }
-  option = {
-    backgroundColor: '#f9f9f9',
+  var option = {
+    // backgroundColor: '#f9f9f9',
     title: {
       text: 'DPA不合格按元器件类别分布',
       left: 'center',
-      subtext: commonSubTitle,
-      subtextStyle: {
-        fontSize: 15,
-        color: '#666',
-      },
+      // subtext: commonSubTitle,
+      // subtextStyle: {
+      //   fontSize: 15,
+      //   color: '#666',
+      // },
       bottom: '30',
       padding: [0, 0],
       textStyle: {
-        color: '#333',
+        color: '#fff',
         fontSize: 12,
         align: 'center'
       },
@@ -333,7 +333,7 @@ function eCharts3 (name, data, secret) {
       icon: 'none',
       align: 'center',
       textStyle: {
-        color: "#333",
+        color: "#fff",
         fontSize: 16 * scale,
         rich: rich
       },
@@ -361,7 +361,7 @@ function eCharts3 (name, data, secret) {
 }
 
 //DPA按国产/进口及质量等级分布
-function eCharts4 (name, data, secret) {
+export function eCharts4 (name, data, secret) {
   var myChart = echarts.init(document.getElementById(name));
   var commonSubTitle = "机密★";
   var commonSubTitleStar = "★";
@@ -389,24 +389,24 @@ function eCharts4 (name, data, secret) {
     arr.push(array);
   }
   var myChart = echarts.init(document.getElementById(name));
-  option = {
+  var option = {
     title: {
       text: 'DPA按质量等级分布',
       left: 'center',
       top: '30',
-      subtext: commonSubTitle,
-      subtextStyle: {
-        fontSize: 15,
-        color: '#666',
-      },
+      // subtext: commonSubTitle,
+      // subtextStyle: {
+      //   fontSize: 15,
+      //   color: '#666',
+      // },
       padding: [0, 0],
       textStyle: {
-        color: "#333",
+        color: "#fff",
         fontSize: 14,
         align: 'center'
       },
     },
-    backgroundColor: '#f9f9f9',
+    // backgroundColor: '#f9f9f9',
     color: ['#2edfa3', '#bce672', '#ff4777', '#70f3ff', '#4b5cc4',
       '#f47983', '#8d4bbb', '#6635EF', '#FFAFDA'
     ],
@@ -617,7 +617,7 @@ export function eCharts5 (name, data, secret) {
 }
 
 //DPA不合格按元器件类型分布
-function eCharts6 (name) {
+export function eCharts6 (name) {
   var myChart = echarts.init(document.getElementById(name));
   option = {
     title: {

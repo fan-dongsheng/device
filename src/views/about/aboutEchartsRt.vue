@@ -91,10 +91,50 @@ export default {
           YQJMC: '三极管',
           WTDW: '上海',
           BHGSL: 10,
+          BL: '1',
+          F_GUOCHANJINKOU: '国产',
+          SECRET: null
+        },
+        {
+          YQJMC: '三极管',
+          WTDW: '天津',
+          BHGSL: 6,
+          PM: '3',
+          F_GUOCHANJINKOU: '国产',
+          SECRET: null
+        },
+        {
+          YQJMC: '三极管',
+          WTDW: '天津',
+          BHGSL: 2,
           PM: '1',
           F_GUOCHANJINKOU: '国产',
           SECRET: null
         },
+        {
+          YQJMC: '二极管',
+          WTDW: '北京',
+          BHGSL: 0,
+          PM: '1',
+          F_GUOCHANJINKOU: '国产',
+          SECRET: null
+        },
+        {
+          YQJMC: '二极管',
+          WTDW: '北京',
+          BHGSL: 12,
+          PM: '1',
+          F_GUOCHANJINKOU: '国产',
+          SECRET: null
+        },
+        {
+          YQJMC: '二极管',
+          WTDW: '天津',
+          BHGSL: 8,
+          PM: '3',
+          F_GUOCHANJINKOU: '国产',
+          SECRET: null
+        }
       ],
       // 复验筛选不合格占比（%）按生产厂家排序
       datasFour: [
@@ -106,7 +146,47 @@ export default {
           F_GUOCHANJINKOU: '国产',
           SECRET: null
         },
-      ],
+        {
+          YQJMC: '三极管',
+          WTDW: '天津',
+          BHGSL: 6,
+          BL: '3',
+          F_GUOCHANJINKOU: '国产',
+          SECRET: null
+        },
+        {
+          YQJMC: '三极管',
+          WTDW: '天津',
+          BHGSL: 2,
+          BL: '1',
+          F_GUOCHANJINKOU: '国产',
+          SECRET: null
+        },
+        {
+          YQJMC: '二极管',
+          WTDW: '北京',
+          BHGSL: 0,
+          BL: '1',
+          F_GUOCHANJINKOU: '国产',
+          SECRET: null
+        },
+        {
+          YQJMC: '二极管',
+          WTDW: '北京',
+          BHGSL: 12,
+          BL: '1',
+          F_GUOCHANJINKOU: '国产',
+          SECRET: null
+        },
+        {
+          YQJMC: '二极管',
+          WTDW: '天津',
+          BHGSL: 8,
+          BL: '3',
+          F_GUOCHANJINKOU: '国产',
+          SECRET: null
+        }
+      ]
     }
   },
   methods: {
