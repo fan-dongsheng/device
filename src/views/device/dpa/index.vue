@@ -3,7 +3,7 @@
     <el-table
       border
       ref="multipleTable"
-      :data="tableDatas.reinspectionList || tableData"
+      :data="tableDatas.dpaList || tableData"
       tooltip-effect="dark"
       :header-cell-style="{ background: '#E5F0FF',color:'#6D87A7',textAlign:'center' }"
       :cell-style="cellstyle"

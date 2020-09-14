@@ -106,7 +106,7 @@
         <tableCommon :tableDatas="tableData" />
       </el-tab-pane>
       <el-tab-pane label="DPA试验" name="second">
-        <dpa :tableDatas="tableData" />
+        <dpa :tableDatas="tableDataDpa" />
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -115,18 +115,21 @@
 <script>
 import tableCommon from '../tableCommon'
 import dpa from '../dpa'
-import { getTable } from '@/api/collra.js'
+import { getTable, getDpa, getFind, getDpaFind } from '@/api/collra.js'
+import eventBus from '@/eventBus'
 export default {
   components: {
     tableCommon,
     dpa
   },
+  // props: ["keyWord"],
   data () {
     return {
       // 隐藏过滤器
       visbleSide: true,
       // 需要传给表格的数据
       tableData: {},
+      tableDataDpa: {},
       // 委托单位
       van: {
         input: '',
@@ -268,12 +271,18 @@ export default {
         checked: false,
         input: ''
       }
+      this.searchAll()
     },
     searchAll () {
       this.getTable()
     },
     handleClick (tab, event) {
       console.log(tab, event)
+      if (tab.name == 'second') {
+        this.getDpa()
+        //Dpa产品推荐
+        this.$emit('getDpaRecommended', this.activeName)
+      }
     },
     // 处理请求参数
     curPam () {
@@ -323,15 +332,49 @@ export default {
       }
       return params
     },
+    //调取复验筛选查询
     async getTable () {
       const params = this.curPam()
       const { data } = await getTable(params)
-      console.log(data, '=========')
+
       this.tableData = data.data
+    },
+    //DPA查询
+    async getDpa () {
+      const params = this.curPam()
+      const { data } = await getDpa(params)
+      console.log(data, '=========')
+      this.tableDataDpa = data.data
+    },
+    //复验关键字搜索
+    async getFind (val) {
+      const { data } = await getFind({
+        keyword: val
+      })
+      this.tableData = data.data
+    },
+    //DPA关键字搜索
+    async getDpaFind (val) {
+      const { data } = await getDpaFind({
+        keyword: val
+      })
+      this.tableDataDpa = data.data
+    }
+  },
+  watch: {
+    "activeName": function (params) {
+      console.log(params);
     }
   },
   created () {
     this.getTable()
+    eventBus.$on('keyWord', (val) => {
+      if (this.activeName == 'first') {
+        this.getFind(val)
+      } else if (this.activeName == 'second') {
+        this.getDpaFind(val)
+      }
+    })
   }
 }
 </script>

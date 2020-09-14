@@ -91,14 +91,14 @@ export default {
           YQJMC: '三极管',
           WTDW: '上海',
           BHGSL: 10,
-          BL: '1',
+          PM: '1',
           F_GUOCHANJINKOU: '国产',
           SECRET: null
         },
         {
           YQJMC: '三极管',
           WTDW: '天津',
-          BHGSL: 6,
+          BHGSL: 8,
           PM: '3',
           F_GUOCHANJINKOU: '国产',
           SECRET: null
@@ -121,12 +121,13 @@ export default {
         },
         {
           YQJMC: '二极管',
-          WTDW: '北京',
+          WTDW: '济南',
           BHGSL: 12,
           PM: '1',
           F_GUOCHANJINKOU: '国产',
           SECRET: null
         },
+
         {
           YQJMC: '二极管',
           WTDW: '天津',

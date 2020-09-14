@@ -59,6 +59,15 @@ export default {
           component: '@/components/AtlasAnalysis.vue',
           path: '/atlasAnalysis',
           menuorigin: 'local'
+        },
+        {
+          index: '/login',
+          title: '元器件大屏',
+          name: 'login',
+          icon: 'icon2',
+          component: '@/components/views/About.vue',
+          path: '/login',
+          menuorigin: 'local'
         }
 
       ]

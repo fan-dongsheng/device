@@ -11,7 +11,7 @@
     <!-- 产品推荐 -->
     <div class="recommended">
       <span style="border-right:1px #396fff solid">产品推荐</span>
-      <span>电容器</span>
+      <span v-for="(item,index) in componentsnameList" :key="index">{{item}}</span>
       <span>电容器</span>
       <span>电容器</span>
       <span>电容器</span>
@@ -31,12 +31,14 @@
       <span>电容器</span>
     </div>
     <!-- 元器件表格 -->
-    <tableCont />
+    <tableCont @getDpaRecommended="getDpaRecommended" />
   </div>
 </template>
 
 <script>
 import tableCont from './tableCont'
+import { getRecommended, getDpaRecommended } from '@/api/collra.js'
+import eventBus from '@/eventBus'
 export default {
   components: {
     tableCont
@@ -44,13 +46,37 @@ export default {
   data () {
     return {
       // 搜索
-      inputV: ''
+      inputV: '',
+      //传给tableCount的值
+      inputNew: '',
+      //复验产品推荐
+      componentsnameList: []
+
     }
   },
   methods: {
-    changeAllStatus () {
+    //关键字搜索
+    async changeAllStatus () {
+      // const {data}=await getFind()
+      this.inputNew = this.inputV
+      eventBus.$emit('keyWord', this.inputV)
+    },
+    //获取复验产品推荐
+    async getRecommended () {
+      const { data } = await getRecommended()
+      this.componentsnameList = data.data.componentsnameList
 
+    },
+    //获取dpa产品推荐
+    async getDpaRecommended (val) {
+      if (val == 'second') {
+        const { data } = await getDpaRecommended()
+        this.componentsnameList = data.data.componentsnameList
+      }
     }
+  },
+  created () {
+    this.getRecommended()
   }
 }
 </script>
