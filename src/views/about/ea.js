@@ -68,15 +68,15 @@ export function PaiXu (name, data, secret) {
   var arr = [];
   var lx = [];
   for (var i = 0; i < data.length; i++) {
-    if (lx.indexOf(data[i].NAME) == -1) {
-      lx.push(data[i].NAME);
+    if (lx.indexOf(data[i].name) == -1) {
+      lx.push(data[i].name);
     }
   }
   for (var i = 0; i < lx.length; i++) {
     var value = 0;
     for (var j = 0; j < data.length; j++) {
-      if (lx[i] == data[j].NAME) {
-        value += parseInt(data[j].VALUE);
+      if (lx[i] == data[j].name) {
+        value += parseInt(data[j].value);
       }
     }
     var array = {
@@ -544,15 +544,15 @@ export function LeiBie (name, data, secret) {
   var arr = [];
   var lx = [];
   for (var i = 0; i < data.length; i++) {
-    if (lx.indexOf(data[i].NAME) == -1) {
-      lx.push(data[i].NAME);
+    if (lx.indexOf(data[i].name) == -1) {
+      lx.push(data[i].name);
     }
   }
   for (var i = 0; i < lx.length; i++) {
     var value = 0;
     for (var j = 0; j < data.length; j++) {
-      if (lx[i] == data[j].NAME) {
-        value += parseInt(data[j].VALUE);
+      if (lx[i] == data[j].name) {
+        value += parseInt(data[j].value);
       }
     }
     var array = {
@@ -568,7 +568,7 @@ export function LeiBie (name, data, secret) {
     commonSubTitle = secret + commonSubTitleStar;
   }
   var option = {
-    color: ['rgba(49,197,197,0.8)', 'rgba(182,162,223,0.8)', 'rgba(214,112,112,0.8)', 'rgba(254,185,128,0.8)', 'rgba(85,179,240,0.8)'],
+    color: ['rgba(49,197,197,0.8)', 'rgba(182,162,223,0.8)', 'rgba(214,112,112,0.8)', 'rgba(254,185,168,0.8)', 'rgba(85,179,240,0.8)'],
     title: {
       text: '复验筛选按类别统计分布',
       // subtext: commonSubTitle,
@@ -841,15 +841,15 @@ export function EacHFn1 (name, data, secret) {
   var arr = [];
   var lx = [];
   for (var i = 0; i < data.length; i++) {
-    if (lx.indexOf(data[i].NAME) == -1) {
-      lx.push(data[i].NAME);
+    if (lx.indexOf(data[i].name) == -1) {
+      lx.push(data[i].name);
     }
   }
   for (var i = 0; i < lx.length; i++) {
     var value = 0;
     for (var j = 0; j < data.length; j++) {
-      if (lx[i] == data[j].NAME) {
-        value += parseInt(data[j].VALUE);
+      if (lx[i] == data[j].name) {
+        value += parseInt(data[j].value);
       }
     }
     var array = {
@@ -933,15 +933,15 @@ export function EacHFn2 (name, data, secret) {
   var arr = [];
   var lx = [];
   for (var i = 0; i < data.length; i++) {
-    if (lx.indexOf(data[i].NAME) == -1) {
-      lx.push(data[i].NAME);
+    if (lx.indexOf(data[i].name) == -1) {
+      lx.push(data[i].name);
     }
   }
   for (var i = 0; i < lx.length; i++) {
     var value = 0;
     for (var j = 0; j < data.length; j++) {
-      if (lx[i] == data[j].NAME) {
-        value += parseInt(data[j].VALUE);
+      if (lx[i] == data[j].name) {
+        value += parseInt(data[j].value);
       }
     }
     var array = {
@@ -958,7 +958,7 @@ export function EacHFn2 (name, data, secret) {
   }
   var myChart = echarts.init(document.getElementById(name));
   var option = {
-    color: ['#A0CE3A', '#31C5C0', '#1E9BD1', '#0F347B', '#585247', '#7F6AAD', '#009D85', "rgba(250,250,250,0.3)"],
+    color: ['#A0CE3A', '#31C5C0', '#1E9BD1', '#36378D', '#585247', '#7F6AAD', '#009D85', "rgba(250,250,250,0.3)"],
     title: {
       text: '复验筛选质量等级分布',
       top: 10,

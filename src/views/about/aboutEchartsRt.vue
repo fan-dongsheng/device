@@ -140,11 +140,11 @@ export default {
       // 复验筛选不合格占比（%）按生产厂家排序
       datasFour: [
         {
-          YQJMC: '三极管',
-          WTDW: '上海',
-          BHGSL: 10,
+          YQJMC: '三极管', //type
+          WTDW: '上海', //name
+          BHGSL: 10, //value
           BL: '1',
-          F_GUOCHANJINKOU: '国产',
+          F_GUOCHANJINKOU: '国产', //import
           SECRET: null
         },
         {
@@ -277,7 +277,13 @@ export default {
   display: flex;
   height: 100%;
   .common {
-    background-image: linear-gradient(270deg, #99faff 0%, #99cfff 100%);
+    background-image: linear-gradient(
+      270deg,
+      #99ccff 0%,
+      #99ffff 81%,
+      #d0f5fe 100%
+    );
+    box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.16);
   }
   .left {
     width: 17%;
@@ -289,7 +295,7 @@ export default {
       flex: 1;
       font-size: 14px;
       padding-right: 5px;
-      padding-left: 20px;
+      padding-left: 10px;
       .box {
         box-sizing: border-box;
         border-bottom: 2px solid @border;

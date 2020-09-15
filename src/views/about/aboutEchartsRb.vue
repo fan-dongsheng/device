@@ -163,7 +163,13 @@ export default {
   display: flex;
   height: 100%;
   .common {
-    background-image: linear-gradient(270deg, #99faff 0%, #99cfff 100%);
+    background-image: linear-gradient(
+      270deg,
+      #99ccff 0%,
+      #99ffff 81%,
+      #d0f5fe 100%
+    );
+    box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.16);
   }
   .left {
     width: 17%;
@@ -175,7 +181,7 @@ export default {
       flex: 1;
       font-size: 14px;
       padding-right: 5px;
-      padding-left: 20px;
+      padding-left: 10px;
       .box {
         box-sizing: border-box;
         border-bottom: 2px solid @border;

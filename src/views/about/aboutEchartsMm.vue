@@ -12,14 +12,14 @@ export default {
     return {
       datas: [
         {
-          NAME: '3++',
-          VALUE: 31,
+          name: '3++',
+          value: 31,
           TIME: '202001',
           SECRET: null
         },
         {
-          NAME: 'c',
-          VALUE: 20,
+          name: 'c',
+          value: 20,
           TIME: '202001',
           SECRET: null
         }
@@ -30,7 +30,7 @@ export default {
     //复验筛选质量等级分布
     async getCountqualitygrade () {
       const { data } = await getCountqualitygrade()
-      this.datas = data.data.countcountriesorimportsList
+      this.datas = data.data.countQualitygradedeList
       EacHFn2('EacHFn2', this.datas, null)
     }
   },

@@ -179,8 +179,8 @@ export function eCharts2 (name, data, secret) {
   var option = {
     title: {
       text: 'DPA不合格按国产/进口比例统计',
-      left: 'center',
-      bottom: '10',
+      left: 10,
+      top: '2',
       // subtext: commonSubTitle,
       // subtextStyle: {
       //   fontSize: 15,
@@ -208,7 +208,12 @@ export function eCharts2 (name, data, secret) {
     legend: {
       orient: 'horizontal',
       show: true,
-      bottom: 0,
+      bottom: 10,
+      textStyle: {
+        color: '#fff',
+        fontSize: 14,
+        align: 'center'
+      },
       data: arr
     },
     series: [{
