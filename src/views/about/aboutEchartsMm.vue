@@ -6,6 +6,7 @@
 
 <script>
 import { EacHFn2 } from './ea'
+import { getCountqualitygrade } from '@/api/screen'
 export default {
   data () {
     return {
@@ -25,8 +26,17 @@ export default {
       ]
     }
   },
+  methods: {
+    //复验筛选质量等级分布
+    async getCountqualitygrade () {
+      const { data } = await getCountqualitygrade()
+      this.datas = data.data.countcountriesorimportsList
+      EacHFn2('EacHFn2', this.datas, null)
+    }
+  },
   mounted () {
-    EacHFn2('EacHFn2', this.datas, null)
+    // EacHFn2('EacHFn2', this.datas, null)
+    this.getCountqualitygrade()
   }
 }
 </script>

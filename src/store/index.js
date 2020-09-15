@@ -11,7 +11,8 @@ const store = new Vuex.Store({
     val: false, // 条件拓展需要的diago弹窗改变
     name: 'tuijin', // 条件拓展需要的name
     relation: '', // 条件拓展需要的关系
-    dataset: [] // 前进后退数组
+    dataset: [], // 前进后退数组
+    TimeScreen: '' //大屏的时间
   },
 
   mutations: { // 对state进行修改
@@ -29,6 +30,9 @@ const store = new Vuex.Store({
     },
     relation (state, val) {
       state.relation = val
+    },
+    changeT (state, val) {
+      state.TimeScreen = val
     }
 
   },

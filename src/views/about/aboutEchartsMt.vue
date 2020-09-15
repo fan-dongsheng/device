@@ -6,6 +6,7 @@
 
 <script>
 import { LeiBie } from './ea.js'
+import { getCountclassification } from '@/api/screen'
 export default {
   data () {
     return {
@@ -19,9 +20,17 @@ export default {
       ]
     }
   },
-
+  methods: {
+    //复验筛选按类别统计分布
+    async getCountclassification () {
+      const { data } = await getCountclassification()
+      this.datas = data.data.countClassificationList
+      LeiBie('main', this.datas, null)
+    }
+  },
   mounted () {
-    LeiBie('main', this.datas, null)
+    // LeiBie('main', this.datas, null)
+    this.getCountclassification()
   }
 }
 </script>

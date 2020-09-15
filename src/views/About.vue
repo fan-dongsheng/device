@@ -6,9 +6,21 @@
     <div class="title2">
       <router-link to="/home/atlasAnalysis">图谱分析</router-link>
     </div>
-    <div class="title3">
+    <div class="title3" v-if="TimeVisble" @click="TimeVisble=false">
       <img src="@/assets/home/date.png" alt />
       <span>选择年度</span>
+    </div>
+    <div class="title3" v-else>
+      <el-date-picker
+        @blur="changeTime"
+        style="width:110px;z-index:1;"
+        size="small"
+        value-format="yyyy-MM"
+        v-model="valueTime"
+        type="month"
+        placeholder="选择月"
+      ></el-date-picker>
+      <!-- <el-button type="primary" size="small">查询</el-button> -->
     </div>
     <div class="left">
       <div class="l-top">
@@ -94,12 +106,19 @@ export default {
   data () {
     return {
       // 搜索
-      inputV: ''
+      inputV: '',
+      valueTime: '',
+      TimeVisble: true
     }
   },
   methods: {
     changeAllStatus () {
 
+    },
+    changeTime (val) {
+
+      // this.TimeVisble = true
+      this.$store.commit('changeT', this.valueTime)
     }
   }
 }

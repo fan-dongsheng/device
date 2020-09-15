@@ -33,6 +33,7 @@
 
 <script>
 import { eCharts1, eCharts2, eCharts3, eCharts4 } from './eb'
+import { getDpaComponentstype, getDpaCountcountriesorimports, getDpaCountprimaryclassification, getDpaCountqualitygrade } from '@/api/screen'
 export default {
   data () {
     return {
@@ -120,10 +121,38 @@ export default {
           eCharts4('eCharts4', this.datasThree, null)
         });
       }
+    },
+    //dpa试验量按器件类型进行统计
+    async getDpaComponentstype () {
+      const { data } = await getDpaComponentstype()
+      this.datas = data.data.componentstypeList
+      eCharts1('eCharts1', this.datas, null)
+    },
+    //Dpa不合格器件按国产进口比例统计
+    async getDpaCountcountriesorimports () {
+      const { data } = await getDpaCountcountriesorimports()
+      this.datasOne = data.data.countcountriesorimportsList
+
+    },
+    //Dpa不合格器件按器件类别统计
+    async getDpaCountprimaryclassification () {
+      const { data } = await getDpaCountprimaryclassification()
+      this.datasTwo = data.data.countPrimaryclassificationList
+
+    },
+    //DPA根据质量等级统计数据结果
+    async getDpaCountqualitygrade () {
+      const { data } = await getDpaCountqualitygrade()
+      this.datasThree = data.data.countqualitygradeList
+
     }
   },
   mounted () {
-    eCharts1('eCharts1', this.datas, null)
+    // eCharts1('eCharts1', this.datas, null)
+    this.getDpaComponentstype()
+    this.getDpaCountcountriesorimports()
+    this.getDpaCountprimaryclassification()
+    this.getDpaCountqualitygrade()
   }
 }
 </script>

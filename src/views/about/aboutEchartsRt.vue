@@ -40,7 +40,7 @@
 
 <script>
 import { PaiXu, EacHFn1, echartsOne, PaiXu2, PaiXu3 } from './ea'
-
+import { getCountcountriesorimports, getCountprimaryclassification, getCountcomponentstype, getOrdermanufacturer, getCountmanufacturer } from '@/api/screen'
 export default {
   data () {
     return {
@@ -217,12 +217,56 @@ export default {
           PaiXu3('PaiXu3', this.datasFour, null)
         });
       }
-    }
+    },
+    //复验筛选不合格器件按国产进口比例统计
+    async getCountcountriesorimports () {
+      const { data } = await getCountcountriesorimports()
+      this.datas = data.data.countcountriesorimportsList
+      PaiXu('PaiXu', this.datas, null)
+    },
+    //复验筛选不合格器件按器件类别统计
+    async getCountprimaryclassification () {
+      const { data } = await getCountprimaryclassification()
+      this.datasOne = data.data.countPrimaryclassificationList
+      // EacHFn1('EacHFn1', this.datasOne, null)
+    },
+    //复验筛选不合格器件按器件类型统计
+    async getCountcomponentstype () {
+      const { data } = await getCountcomponentstype()
+      this.datasTwo = data.data.countComponentstypeList
+      // echartsOne('echartsOne', this.datasTwo, null)
+    },
+    //复验筛选不合格按生产厂家出现次数排序
+    async getOrdermanufacturer () {
+      const { data } = await getOrdermanufacturer()
+      this.datasThree = data.data.orderManufacturerList
+      // PaiXu2('PaiXu2', this.datasThree, '国产', null)
+    },
+    //复验筛选不合格器件按生产厂家占比排序
+    async getCountmanufacturer () {
+      const { data } = await getCountmanufacturer()
+      this.datasFour = data.data.countmanufacturerList
+      // PaiXu3('PaiXu3', this.datasFour, null)
+    },
   },
   mounted () {
 
-    PaiXu('PaiXu', this.datas, null)
-
+    // PaiXu('PaiXu', this.datas, null)
+    this.getCountcountriesorimports()
+    this.getCountprimaryclassification()
+    this.getCountcomponentstype()
+    this.getOrdermanufacturer()
+    this.getCountmanufacturer()
+  },
+  watch: {
+    '$store.state.TimeScreen': function (val) {
+      console.log(val, '=======>>>>>');
+      this.getCountcountriesorimports()
+      this.getCountprimaryclassification()
+      this.getCountcomponentstype()
+      this.getOrdermanufacturer()
+      this.getCountmanufacturer()
+    }
   }
 }
 </script>

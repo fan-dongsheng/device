@@ -6,6 +6,7 @@
 
 <script>
 import { eCharts5 } from './eb.js'
+import { getDpaCountcomponentstype } from '@/api/screen'
 export default {
   data () {
     return {
@@ -27,9 +28,17 @@ export default {
       ]
     }
   },
-
+  methods: {
+    //DPA不合格按元器件类型分类
+    async getDpaCountcomponentstype () {
+      const { data } = await getDpaCountcomponentstype()
+      this.datas = data.data.countcomponentstypeList
+      eCharts5('eCharts5', this.datas, null)
+    }
+  },
   mounted () {
-    eCharts5('eCharts5', this.datas, null)
+    // eCharts5('eCharts5', this.datas, null)
+    this.getDpaCountcomponentstype()
   }
 }
 </script>
