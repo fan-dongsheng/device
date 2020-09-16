@@ -160,33 +160,41 @@ export function PaiXu (name, data, secret) {
 
 // 复验筛选不合格占比（%）按生产厂家排序
 export function PaiXu3 (name, data, secret) {
-  var commonSubTitle = "机密★";
-  var commonSubTitleStar = "★";
+  // var commonSubTitle = "机密★";
+  // var commonSubTitleStar = "★";
   if (secret) {
     commonSubTitle = secret + commonSubTitleStar;
   }
   var myChart = echarts.init(document.getElementById(name));
   var dataX = [], data_one = [], data_two = [], data_three = [], dest = [];
-  group("YQJMC", data, dest);
+  group("type", data, dest);
   for (var i = 0; i < dest.length; i++) {
     dataX.push(dest[i].name);
 
     if (null != dest[i].data[0]) {
-      var test1 = '{"name":"' + dest[i].data[0].WTDW + '","value":' + dest[i].data[0].BL + '}';
+      var test1 = '{"name":"' + dest[i].data[0].name + '","value":"' + dest[i].data[0].value + '"}';
       var test2 = JSON.parse(test1);
       data_one.push(test2);
     }
 
     if (null != dest[i].data[1]) {
-      var test3 = '{"name":"' + dest[i].data[1].WTDW + '","value":' + dest[i].data[1].BL + '}';
+      var test3 = '{"name":"' + dest[i].data[1].name + '","value":"' + dest[i].data[1].value + '"}';
       var test4 = JSON.parse(test3);
       data_two.push(test4);
+    } else {
+      var test3 = { name: '', value: '' };
+      // var test4 = JSON.parse(test3);
+      data_two.push(test3);
     }
 
     if (null != dest[i].data[2]) {
-      var test5 = '{"name":"' + dest[i].data[2].WTDW + '","value":' + dest[i].data[2].BL + '}';
+      var test5 = '{"name":"' + dest[i].data[2].name + '","value":"' + dest[i].data[2].value + '"}';
       var test6 = JSON.parse(test5);
       data_three.push(test6);
+    } else {
+      var test5 = { name: '', value: '' };
+      // var test6 = JSON.parse(test5);
+      data_three.push(test5);
     }
 
   }
@@ -307,9 +315,19 @@ export function PaiXu3 (name, data, secret) {
         type: 'shadow'
       },
       formatter: function (params) {
-        return params[0].data.name + ':' + params[0].data.value
-          + "<br/>" + params[1].data.name + ':' + params[1].data.value
-          + "<br/>" + params[2].data.name + ':' + params[2].data.value;
+        console.log(params);
+        var aaa = ''
+        var bbb = ''
+        params.forEach(item => {
+          if (item.data.name) {
+            aaa = `${item.data.name}:${item.data.value}`
+            bbb += aaa + "<br/>"
+          }
+
+        })
+
+        console.log(bbb);
+        return bbb
       }
     },
     calculable: true,
@@ -377,8 +395,8 @@ export function echartsOne (name, data, secret) {
   var dataX = [], dataY_GC = [], dataY_JK = [];
   var lx = [];
   for (var i = 0; i < data.length; i++) {
-    if (lx.indexOf(data[i].NAME) == -1) {
-      lx.push(data[i].NAME);
+    if (lx.indexOf(data[i].name) == -1) {
+      lx.push(data[i].name);
     }
   }
 
@@ -386,9 +404,9 @@ export function echartsOne (name, data, secret) {
     dataX.push(lx[i]);
     var value_GC = 0, value_JK = 0;
     for (var j = 0; j < data.length; j++) {
-      if (lx[i] == data[j].NAME) {
-        value_GC += parseInt(data[j].JK);
-        value_JK += parseInt(data[j].GC);
+      if (lx[i] == data[j].name) {
+        value_GC += parseInt(data[j].jk);
+        value_JK += parseInt(data[j].gc);
       }
     }
     dataY_GC.push(value_GC);
@@ -628,31 +646,40 @@ export function PaiXu2 (name, data, name1, secret) {
   var dataX = [], data_one = [], data_two = [], data_three = [];
   var data1 = [];
   for (var i = 0; i < data.length; i++) {
-    if (data[i].F_GUOCHANJINKOU == name1) {
+    //国产进口判断
+    if (data[i].import == name1) {
       data1.push(data[i])
     }
   }
   var dest = [];
-  group("YQJMC", data1, dest);
+  group("type", data1, dest);
   for (var i = 0; i < dest.length; i++) {
     dataX.push(dest[i].name);
 
     if (null != dest[i].data[0]) {
-      var test1 = '{"name":"' + dest[i].data[0].WTDW + '","value":' + dest[i].data[0].BHGSL + '}';
+      var test1 = '{"name":"' + dest[i].data[0].name + '","value":' + dest[i].data[0].value + '}';
       var test2 = JSON.parse(test1);
       data_one.push(test2);
     }
 
     if (null != dest[i].data[1]) {
-      var test3 = '{"name":"' + dest[i].data[1].WTDW + '","value":' + dest[i].data[1].BHGSL + '}';
+      var test3 = '{"name":"' + dest[i].data[1].name + '","value":"' + dest[i].data[1].value + '"}';
       var test4 = JSON.parse(test3);
       data_two.push(test4);
+    } else {
+      var test3 = { name: '', value: '' };
+      // var test4 = JSON.parse(test3);
+      data_two.push(test3);
     }
 
     if (null != dest[i].data[2]) {
-      var test5 = '{"name":"' + dest[i].data[2].WTDW + '","value":' + dest[i].data[2].BHGSL + '}';
+      var test5 = '{"name":"' + dest[i].data[2].name + '","value":"' + dest[i].data[2].value + '"}';
       var test6 = JSON.parse(test5);
       data_three.push(test6);
+    } else {
+      var test5 = { name: '', value: '' };
+      // var test6 = JSON.parse(test5);
+      data_three.push(test5);
     }
   }
   myChart.clear()
@@ -772,9 +799,18 @@ export function PaiXu2 (name, data, name1, secret) {
         type: 'shadow'
       },
       formatter: function (params) {
-        return params[0].data.name + ':' + params[0].data.value
-          + "<br/>" + params[1].data.name + ':' + params[1].data.value
-          + "<br/>" + params[2].data.name + ':' + params[2].data.value;
+        var aaa = ''
+        var bbb = ''
+        params.forEach(item => {
+          if (item.data.name) {
+            aaa = `${item.data.name}:${item.data.value}`
+            bbb += aaa + "<br/>"
+          }
+
+        })
+
+        console.log(bbb);
+        return bbb
       }
     },
     calculable: true,
@@ -1085,6 +1121,7 @@ export function EacHFn2 (name, data, secret) {
 // 第二个参数，传入待分组数组（原始数组），
 // 第三个参数，接收分组后的数组（自定义空数组）
 function group (id, data, data2) {
+
   var map = {};
   for (var a = 0; a < data.length; a++) {
     var ai = data[a];

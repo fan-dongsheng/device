@@ -140,52 +140,44 @@ export default {
       // 复验筛选不合格占比（%）按生产厂家排序
       datasFour: [
         {
-          YQJMC: '三极管', //type
-          WTDW: '上海', //name
-          BHGSL: 10, //value
-          BL: '1',
-          F_GUOCHANJINKOU: '国产', //import
-          SECRET: null
+          "import": "国外厂家",
+          "name": "Texas Instruments",
+          "type": "中小规模数字逻辑电路",
+          "value": "25"
+        }, {
+          "import": "国外厂家",
+          "name": "Texas Instruments",
+          "type": "单片数字集成电路",
+          "value": "25"
+        }, {
+          "import": "国内厂家",
+          "name": "中航光电科技股份有限公司(158厂)",
+          "type": "低频电连接器（1-49芯）",
+          "value": "50"
         },
         {
-          YQJMC: '三极管',
-          WTDW: '天津',
-          BHGSL: 6,
-          BL: '3',
-          F_GUOCHANJINKOU: '国产',
-          SECRET: null
+          "import": "国内厂家",
+          "name": "贵州航天电器股份有限公司（3412、19厂）",
+          "type": "单片数字集成电路",
+          "value": "15"
         },
         {
-          YQJMC: '三极管',
-          WTDW: '天津',
-          BHGSL: 2,
-          BL: '1',
-          F_GUOCHANJINKOU: '国产',
-          SECRET: null
+          "import": "国内厂家",
+          "name": "BURR-BROWN",
+          "type": "单片数字集成电路",
+          "value": "10"
         },
         {
-          YQJMC: '二极管',
-          WTDW: '北京',
-          BHGSL: 0,
-          BL: '1',
-          F_GUOCHANJINKOU: '国产',
-          SECRET: null
+          "import": "国内厂家",
+          "name": "石家庄天林石无二电子有限公司",
+          "type": "中小功率半导体三极管（<10W）",
+          "value": "16"
         },
         {
-          YQJMC: '二极管',
-          WTDW: '北京',
-          BHGSL: 12,
-          BL: '1',
-          F_GUOCHANJINKOU: '国产',
-          SECRET: null
-        },
-        {
-          YQJMC: '二极管',
-          WTDW: '天津',
-          BHGSL: 8,
-          BL: '3',
-          F_GUOCHANJINKOU: '国产',
-          SECRET: null
+          "import": "国内厂家",
+          "name": "陕西金山电气集团有限公司电感器件厂(4390厂)",
+          "type": "电感器",
+          "value": "0"
         }
       ]
     }
@@ -208,7 +200,7 @@ export default {
       else if (index == 3) {
         this.$nextTick(function () {
           //用来解决数据不更新问题
-          PaiXu2('PaiXu2', this.datasThree, '国产', null)
+          PaiXu2('PaiXu2', this.datasThree, '国内厂家', null)
         });
       }
       else if (index == 4) {
