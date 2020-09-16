@@ -283,6 +283,11 @@ export default {
         //Dpa产品推荐
         this.$emit('getDpaRecommended', this.activeName)
       }
+      else if (tab.name == 'first') {
+        // this.getDpa()
+        //复验产品推荐
+        this.$emit('getDpaRecommended', this.activeName)
+      }
     },
     // 处理请求参数
     curPam () {

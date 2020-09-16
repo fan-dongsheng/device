@@ -12,6 +12,7 @@
     <div class="recommended">
       <span style="border-right:1px #396fff solid">产品推荐</span>
       <span v-for="(item,index) in componentsnameList" :key="index">{{item}}</span>
+      <!-- <span>电容器</span>
       <span>电容器</span>
       <span>电容器</span>
       <span>电容器</span>
@@ -27,8 +28,7 @@
       <span>电容器</span>
       <span>电容器</span>
       <span>电容器</span>
-      <span>电容器</span>
-      <span>电容器</span>
+      <span>电容器</span>-->
     </div>
     <!-- 元器件表格 -->
     <tableCont @getDpaRecommended="getDpaRecommended" />
@@ -72,6 +72,8 @@ export default {
       if (val == 'second') {
         const { data } = await getDpaRecommended()
         this.componentsnameList = data.data.componentsnameList
+      } else if (val == 'first') {
+        this.getRecommended()
       }
     }
   },
