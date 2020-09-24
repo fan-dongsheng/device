@@ -55,6 +55,7 @@
         <template slot-scope="scope">{{ scope.row.id }}</template>
       </el-table-column>
       <el-table-column prop="testnumber" label="试验编号"></el-table-column>
+      <el-table-column prop="primaryclassification" label="一级分类"></el-table-column>
       <el-table-column prop="entrustedunit" label="委托单位"></el-table-column>
       <el-table-column prop="entrustedtime" label="委托时间"></el-table-column>
       <el-table-column prop="workbelong" label="所属工程"></el-table-column>
@@ -75,7 +76,7 @@
         <template slot-scope="scope">{{ scope.row.packageform }}</template>
       </el-table-column>
       <el-table-column prop="fee" label="费用"></el-table-column>
-      <el-table-column prop="primaryclassification" label="一级分类"></el-table-column>
+
       <el-table-column prop="flowsheetnotes" label="流程单备注"></el-table-column>
       <el-table-column prop="client" label="委托人"></el-table-column>
       <el-table-column prop="status" label="状态"></el-table-column>

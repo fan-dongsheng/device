@@ -3,22 +3,27 @@
     <!-- 左侧菜单 -->
     <div class="side">
       <div class="side-top">
-        <span @click="visbleSide=!visbleSide">隐藏过滤器</span>
+        <span @click="visbleSide = !visbleSide">隐藏过滤器</span>
         <span @click="clearData">重置</span>
       </div>
       <el-button
         type="primary"
         size="small"
         @click="searchAll"
-        style="margin-left:10px;margin-bottom:10px;cursor: pointer;"
-      >搜索</el-button>
+        style="margin-left: 10px; margin-bottom: 10px; cursor: pointer"
+        >搜索</el-button
+      >
       <div class="side-bottom" v-if="visbleSide">
         <div class="box">
           <div class="title">
             <el-checkbox v-model="van.checked">委托单位</el-checkbox>
           </div>
           <div class="cont">
-            <el-input size="small" v-model="van.input" placeholder="请输入单位名称"></el-input>
+            <el-input
+              size="small"
+              v-model="van.input"
+              placeholder="请输入单位名称"
+            ></el-input>
           </div>
         </div>
         <div class="box">
@@ -26,7 +31,11 @@
             <el-checkbox v-model="cheng.checked">元器件名称</el-checkbox>
           </div>
           <div class="cont">
-            <el-input size="small" v-model="cheng.input" placeholder="请输入单位名称"></el-input>
+            <el-input
+              size="small"
+              v-model="cheng.input"
+              placeholder="请输入单位名称"
+            ></el-input>
           </div>
         </div>
         <div class="box">
@@ -34,7 +43,12 @@
             <el-checkbox v-model="weituo.checked">委托时间</el-checkbox>
           </div>
           <div class="cont">
-            <el-date-picker size="small" v-model="weituo.timeValue" type="date" placeholder="选择日期"></el-date-picker>
+            <el-date-picker
+              size="small"
+              v-model="weituo.timeValue"
+              type="date"
+              placeholder="选择日期"
+            ></el-date-picker>
           </div>
         </div>
         <div class="box">
@@ -57,7 +71,11 @@
             <el-checkbox v-model="factor.checked">生产厂家</el-checkbox>
           </div>
           <div class="cont">
-            <el-input size="small" v-model="factor.input" placeholder="请输入厂家名称"></el-input>
+            <el-input
+              size="small"
+              v-model="factor.input"
+              placeholder="请输入厂家名称"
+            ></el-input>
           </div>
         </div>
         <div class="box">
@@ -95,7 +113,11 @@
             <el-checkbox v-model="fight.checked">试验单位</el-checkbox>
           </div>
           <div class="cont">
-            <el-input size="small" v-model="fight.input" placeholder="请输入单位名称"></el-input>
+            <el-input
+              size="small"
+              v-model="fight.input"
+              placeholder="请输入单位名称"
+            ></el-input>
           </div>
         </div>
       </div>

@@ -15,7 +15,7 @@ import axios from 'axios'
 //   // 这里执行失败请求
 // })
 const request = axios.create({
-  baseURL: 'http://172.20.10.6:8024' // 基础路径
+  baseURL: 'http://192.168.43.211:8024' // 基础路径
 })
 export default request
 // // 在响应数据到达响应拦截之前需要执行的函数,改变 json-bigint;
