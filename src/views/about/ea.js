@@ -1,4 +1,5 @@
 import echarts from 'echarts'
+import store from '@/store'
 var flag = false;
 
 var date = new Date();
@@ -158,6 +159,222 @@ export function PaiXu (name, data, secret) {
   myChart.setOption(option, true);
 }
 
+// 复验筛选不合格占比（%）按生产厂家排序案例案例
+export function anli (name, data, secret) {
+  if (secret) {
+    var commonSubTitle = secret + commonSubTitleStar;
+  }
+  var myChart = echarts.init(document.getElementById(name));
+  // var dataX = [], data_one = [], data_two = [], data_three = [], dest = [];
+  // group1("name", data, dest);
+
+  var ovrData = [
+    { name: "校纪校规", value: 80 },
+    { name: "文明礼仪文明礼仪", value: 120 },
+    { name: "作息出勤作息出勤作息出勤", value: 310 },
+    { name: "体锻课", value: 100 },
+    { name: "劳动卫生劳动卫生劳动卫生劳动卫生", value: 60 },
+    { name: "大课间", value: 500 }
+  ];
+  ovrData.sort(function (a, b) {
+    return b.value - a.value;
+  }).slice(0, 6);
+
+  ovrData.sort(function (a, b) {
+    return b.value - a.value;
+  });
+  var legendData = [],
+    seriesData = [];
+  ovrData.map(function (a, b) {
+    legendData.push(a.name);
+    seriesData.push(a.value)
+  });
+  ovrData = {
+    name: '总计',
+    type: 'bar', // 柱子的形状
+    barWidth: '60%', // 柱子的宽度
+    data: seriesData
+  }
+  var option = {
+    color: ['#29EEF3'],
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'shadow'
+      }
+    },
+    grid: {
+      left: '5%',
+      right: '5%',
+      bottom: '5%',
+      containLabel: true
+    },
+    xAxis: {
+      triggerEvent: true, // true的时候hover效果方可生效
+      type: 'category',
+      axisLine: {
+        // show: false // X轴线不显示
+      },
+      axisTick: {
+        show: false // 是否显示坐标轴刻度
+      },
+      data: legendData,
+      axisLabel: {
+        // 设置轴上字体的颜色
+        show: true,
+        textStyle: {
+          color: "#fff"
+        },
+        // 隐藏过长的文字, 超出省略号
+        formatter: function (value) {
+          return (value.length > 4) ? (value.slice(0, 4) + "...") : value
+        }
+      }
+    },
+    yAxis: {
+      splitNumber: 5, // 控制Y轴数值显示数量
+      axisLine: {
+        // show: false // Y轴线不显示
+      },
+      axisTick: {
+        show: false // 是否显示坐标轴刻度
+      },
+      splitLine: {
+        show: true,
+        lineStyle: {
+          // color: "#e6ecfd", // 分割线背景色
+          width: 1 // 分割线宽度
+        }
+      },
+      axisLabel: {
+        show: true,
+        textStyle: {
+          color: "#fff"
+        }
+      }
+    },
+    series: [ovrData]
+  };
+  // 使用刚指定的配置项和数据显示图表。
+  myChart.setOption(option);
+  // 处理点击事件并且跳转到相应的百度搜索页面
+  myChart.on('click', function (params) {
+    console.log(params.name, '==========????');
+    let echartsDa = {
+      bool: true,
+      name: params.name
+    }
+    store.commit('echartsVisble', echartsDa)
+    // window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name));
+  });
+}
+// 复验筛选不合格占比（%）按生产厂家排序案例案例钻取型号
+export function anliType (name, data, secret) {
+  if (secret) {
+    var commonSubTitle = secret + commonSubTitleStar;
+  }
+  var myChart = echarts.init(document.getElementById(name));
+  // var dataX = [], data_one = [], data_two = [], data_three = [], dest = [];
+  // group1("name", data, dest);
+
+  var ovrData = [
+    { name: "校纪校规", value: 80 },
+    { name: "文明礼仪文明礼仪", value: 120 },
+    { name: "作息出勤作息出勤作息出勤", value: 310 },
+    { name: "体锻课", value: 100 },
+    { name: "劳动卫生劳动卫生劳动卫生劳动卫生", value: 60 },
+    { name: "大课间", value: 500 }
+  ];
+  ovrData.sort(function (a, b) {
+    return b.value - a.value;
+  }).slice(0, 6);
+
+  ovrData.sort(function (a, b) {
+    return b.value - a.value;
+  });
+  var legendData = [],
+    seriesData = [];
+  ovrData.map(function (a, b) {
+    legendData.push(a.name);
+    seriesData.push(a.value)
+  });
+  ovrData = {
+    name: '总计',
+    type: 'bar', // 柱子的形状
+    barWidth: '60%', // 柱子的宽度
+    data: seriesData
+  }
+  var option = {
+    color: ['#29EEF3'],
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'shadow'
+      }
+    },
+    grid: {
+      left: '5%',
+      right: '5%',
+      bottom: '5%',
+      containLabel: true
+    },
+    xAxis: {
+      triggerEvent: true, // true的时候hover效果方可生效
+      type: 'category',
+      axisLine: {
+        // show: false // X轴线不显示
+      },
+      axisTick: {
+        show: false // 是否显示坐标轴刻度
+      },
+      data: legendData,
+      axisLabel: {
+        // 设置轴上字体的颜色
+        show: true,
+        textStyle: {
+          color: "#333"
+        },
+        // 隐藏过长的文字, 超出省略号
+        formatter: function (value) {
+          return (value.length > 4) ? (value.slice(0, 4) + "...") : value
+        }
+      }
+    },
+    yAxis: {
+      splitNumber: 5, // 控制Y轴数值显示数量
+      axisLine: {
+        // show: false // Y轴线不显示
+      },
+      axisTick: {
+        show: false // 是否显示坐标轴刻度
+      },
+      splitLine: {
+        show: true,
+        lineStyle: {
+          // color: "#e6ecfd", // 分割线背景色
+          width: 1 // 分割线宽度
+        }
+      },
+      axisLabel: {
+        show: true,
+        textStyle: {
+          color: "#333"
+        }
+      }
+    },
+    series: [ovrData]
+  };
+  // 使用刚指定的配置项和数据显示图表。
+  myChart.setOption(option);
+  // 处理点击事件并且跳转到相应的百度搜索页面
+  /*  myChart.on('click', function (params) {
+     console.log(params, '==========????');
+ 
+     store.commit('echartsVisble', true)
+     // window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name));
+   }); */
+}
+
 // 复验筛选不合格占比（%）按生产厂家排序
 export function PaiXu3 (name, data, secret) {
   // var commonSubTitle = "机密★";
@@ -315,7 +532,7 @@ export function PaiXu3 (name, data, secret) {
         type: 'shadow'
       },
       formatter: function (params) {
-        console.log(params);
+        // console.log(params);
         var aaa = ''
         var bbb = ''
         params.forEach(item => {
@@ -326,7 +543,7 @@ export function PaiXu3 (name, data, secret) {
 
         })
 
-        console.log(bbb);
+        // console.log(bbb);
         return bbb
       }
     },
@@ -1121,6 +1338,29 @@ export function EacHFn2 (name, data, secret) {
 // 第二个参数，传入待分组数组（原始数组），
 // 第三个参数，接收分组后的数组（自定义空数组）
 function group (id, data, data2) {
+
+  var map = {};
+  for (var a = 0; a < data.length; a++) {
+    var ai = data[a];
+    if (!map[ai[id]]) {
+      data2.push({
+        name: ai[id],
+        data: [ai]
+      });
+      map[ai[id]] = ai;
+    } else {
+      for (var b = 0; b < data2.length; b++) {
+        var bi = data2[b];
+        if (bi.name == ai[id]) {
+          bi.data.push(ai);
+          break;
+        }
+      }
+    }
+  }
+}
+//排序格式化
+function group1 (id, data, data2) {
 
   var map = {};
   for (var a = 0; a < data.length; a++) {

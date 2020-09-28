@@ -97,5 +97,13 @@ export const getDpaCountqualitygrade = params => {
     params
   })
 }
+//按厂家排序点击钻取查询
+export const getQuerynowmanufacturer = params => {
+  return request({
+    method: 'GET',
+    url: '/querynowmanufacturer',
+    params
+  })
+}
 
 

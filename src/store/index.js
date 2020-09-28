@@ -12,7 +12,9 @@ const store = new Vuex.Store({
     name: 'tuijin', // 条件拓展需要的name
     relation: '', // 条件拓展需要的关系
     dataset: [], // 前进后退数组
-    TimeScreen: '' //大屏的时间
+    TimeScreen: '', //大屏的时间
+    echartsVisble: false,//echarts下钻数据显示
+    FactorName: '' //排序 下钻厂家名字
   },
 
   mutations: { // 对state进行修改
@@ -33,6 +35,11 @@ const store = new Vuex.Store({
     },
     changeT (state, val) {
       state.TimeScreen = val
+    },
+    echartsVisble (state, val) {
+
+      state.echartsVisble = val.bool
+      state.FactorName = val.name
     }
 
   },

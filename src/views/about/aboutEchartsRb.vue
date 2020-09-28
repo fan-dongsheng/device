@@ -1,32 +1,48 @@
 <template>
   <div class="aboutEchartsRb">
     <div class="left">
-      <div class="title" @click="activeTle(0)" :class="{'common':active==0}">
+      <div class="title" @click="activeTle(0)" :class="{ common: active == 0 }">
         <div class="box">
           <span>DPA试验量按器件类型进行统计</span>
         </div>
       </div>
-      <div class="title" @click="activeTle(1)" :class="{'common':active==1}">
+      <div class="title" @click="activeTle(1)" :class="{ common: active == 1 }">
         <div class="box">
           <span>DPA不合格按国产进口比例统计</span>
         </div>
       </div>
-      <div class="title" @click="activeTle(2)" :class="{'common':active==2}">
+      <div class="title" @click="activeTle(2)" :class="{ common: active == 2 }">
         <div class="box">
           <span>DPA不合格按元器件类别分布</span>
         </div>
       </div>
-      <div class="title" @click="activeTle(3)" :class="{'common':active==3}">
+      <div class="title" @click="activeTle(3)" :class="{ common: active == 3 }">
         <div class="box">
           <span>DPA按质量等级分布</span>
         </div>
       </div>
     </div>
     <div class="right">
-      <div id="eCharts1" style="width: 100%;height:100%;" v-show="active==0"></div>
-      <div id="eCharts2" style="width: 100%;height:100%;" v-show="active==1"></div>
-      <div id="eCharts3" style="width: 100%;height:100%;" v-show="active==2"></div>
-      <div id="eCharts4" style="width: 100%;height:100%;" v-show="active==3"></div>
+      <div
+        id="eCharts1"
+        style="width: 100%; height: 100%"
+        v-show="active == 0"
+      ></div>
+      <div
+        id="eCharts2"
+        style="width: 100%; height: 100%"
+        v-show="active == 1"
+      ></div>
+      <div
+        id="eCharts3"
+        style="width: 100%; height: 100%"
+        v-show="active == 2"
+      ></div>
+      <div
+        id="eCharts4"
+        style="width: 100%; height: 100%"
+        v-show="active == 3"
+      ></div>
     </div>
   </div>
 </template>
@@ -170,6 +186,7 @@ export default {
       #d0f5fe 100%
     );
     box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.16);
+    color: #333;
   }
   .left {
     width: 17%;

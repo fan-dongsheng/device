@@ -5,12 +5,20 @@
       ref="multipleTable"
       :data="tableDatas.dpaList || tableData"
       tooltip-effect="dark"
-      :header-cell-style="{ background: '#E5F0FF',color:'#6D87A7',textAlign:'center' }"
+      :header-cell-style="{
+        background: '#E5F0FF',
+        color: '#6D87A7',
+        textAlign: 'center',
+      }"
       :cell-style="cellstyle"
       @selection-change="handleSelectionChange"
       :row-key="getRowKeys"
     >
-      <el-table-column type="selection" width="39" :reserve-selection="true"></el-table-column>
+      <el-table-column
+        type="selection"
+        width="39"
+        :reserve-selection="true"
+      ></el-table-column>
       <el-table-column type="expand">
         <template slot-scope="props">
           <div class="table-ee">
@@ -55,20 +63,48 @@
         <template slot-scope="scope">{{ scope.row.id }}</template>
       </el-table-column>
       <el-table-column prop="testnumber" label="试验编号"></el-table-column>
-      <el-table-column prop="primaryclassification" label="一级分类"></el-table-column>
+      <el-table-column
+        prop="primaryclassification"
+        label="一级分类"
+      ></el-table-column>
+      <el-table-column
+        prop="componentstype"
+        label="元器件类型"
+      ></el-table-column>
       <el-table-column prop="entrustedunit" label="委托单位"></el-table-column>
-      <el-table-column prop="entrustedtime" label="委托时间"></el-table-column>
-      <el-table-column prop="workbelong" label="所属工程"></el-table-column>
-      <el-table-column prop="componentstype" label="元器件类型"></el-table-column>
-      <el-table-column prop="componentsname" label="元器件名称"></el-table-column>
+      <!-- <el-table-column prop="entrustedtime" label="委托时间"></el-table-column>
+      <el-table-column prop="workbelong" label="所属工程"></el-table-column> -->
+
+      <el-table-column
+        prop="componentsname"
+        label="元器件名称"
+      ></el-table-column>
       <el-table-column prop="productionlot" label="生产批次"></el-table-column>
       <el-table-column prop="manufacturer" label="生产厂家"></el-table-column>
-      <el-table-column prop="countriesorimports" label="国产/进口"></el-table-column>
-      <el-table-column prop="specifiedsamplenumber" label="DPA规定抽样数"></el-table-column>
-      <el-table-column prop="actualamplenumber" label="DPA实际抽样数"></el-table-column>
-      <el-table-column prop="unqualifieditems" label="DPA不合格项目"></el-table-column>
-      <el-table-column prop="unqualifiednumber" label="DPA不合格数量"></el-table-column>
-      <el-table-column prop="testconclusion" label="DPA试验结论"></el-table-column>
+      <el-table-column
+        prop="countriesorimports"
+        label="国产/进口"
+      ></el-table-column>
+      <el-table-column
+        prop="specifiedsamplenumber"
+        label="DPA规定抽样数"
+      ></el-table-column>
+      <el-table-column
+        prop="actualamplenumber"
+        label="DPA实际抽样数"
+      ></el-table-column>
+      <el-table-column
+        prop="unqualifieditems"
+        label="DPA不合格项目"
+      ></el-table-column>
+      <el-table-column
+        prop="unqualifiednumber"
+        label="DPA不合格数量"
+      ></el-table-column>
+      <el-table-column
+        prop="testconclusion"
+        label="DPA试验结论"
+      ></el-table-column>
       <el-table-column prop="testunit" label="DPA试验单位"></el-table-column>
 
       <el-table-column prop="qualitygrade" label="质量等级"></el-table-column>
@@ -77,7 +113,10 @@
       </el-table-column>
       <el-table-column prop="fee" label="费用"></el-table-column>
 
-      <el-table-column prop="flowsheetnotes" label="流程单备注"></el-table-column>
+      <el-table-column
+        prop="flowsheetnotes"
+        label="流程单备注"
+      ></el-table-column>
       <el-table-column prop="client" label="委托人"></el-table-column>
       <el-table-column prop="status" label="状态"></el-table-column>
       <el-table-column prop="purchasenumber" label="采购编号"></el-table-column>

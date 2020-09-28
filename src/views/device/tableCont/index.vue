@@ -3,7 +3,7 @@
     <!-- 左侧菜单 -->
     <div class="side">
       <div class="side-top">
-        <span @click="visbleSide = !visbleSide">隐藏过滤器</span>
+        <!-- <span @click="visbleSide = !visbleSide">隐藏过滤器</span> -->
         <span @click="clearData">重置</span>
       </div>
       <el-button
@@ -59,6 +59,21 @@
             <el-select size="small" v-model="type.value" placeholder="请选择">
               <el-option
                 v-for="item in type.options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
+            </el-select>
+          </div>
+        </div>
+        <div class="box">
+          <div class="title">
+            <el-checkbox v-model="moshi.checked">失效模式</el-checkbox>
+          </div>
+          <div class="cont">
+            <el-select size="small" v-model="moshi.value" placeholder="请选择">
+              <el-option
+                v-for="item in moshi.options"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
@@ -188,6 +203,27 @@ export default {
           label: '北京烤鸭'
         }]
 
+      },
+      //失效模式
+      moshi: {
+        checked: false,
+        value: '',
+        options: [{
+          value: '选项1',
+          label: '黄金糕'
+        }, {
+          value: '选项2',
+          label: '双皮奶'
+        }, {
+          value: '选项3',
+          label: '蚵仔煎'
+        }, {
+          value: '选项4',
+          label: '龙须面'
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        }]
       },
       // 生产厂家
       factor: {

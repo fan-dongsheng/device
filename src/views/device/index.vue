@@ -3,32 +3,35 @@
     <!-- 检索 -->
 
     <div class="div-flx">
-      <el-input placeholder="输入关键字搜索" v-model="inputV" class="input-with-select"></el-input>
+      <el-input
+        placeholder="输入关键字搜索"
+        v-model="inputV"
+        class="input-with-select"
+      ></el-input>
       <el-button type="primary" @click="changeAllStatus">
         <span class="iconImg"></span>
       </el-button>
     </div>
-    <!-- 产品推荐 -->
-    <div class="recommended">
-      <span style="border-right:1px #396fff solid">产品推荐</span>
-      <span v-for="(item,index) in componentsnameList" :key="index">{{item}}</span>
-      <!-- <span>电容器</span>
-      <span>电容器</span>
-      <span>电容器</span>
-      <span>电容器</span>
-      <span>电容器</span>
-      <span>电容器</span>
-      <span>电容器</span>
-      <span>电容器</span>
-      <span>电容器</span>
-      <span>电容器</span>
-      <span>电容器</span>
-      <span>电容器</span>
-      <span>电容器</span>
-      <span>电容器</span>
-      <span>电容器</span>
-      <span>电容器</span>
-      <span>电容器</span>-->
+
+    <el-collapse-transition>
+      <div v-show="show">
+        <!-- 产品推荐 -->
+        <div class="recommended">
+          <span style="border-right: 1px #396fff solid">产品推荐</span>
+          <span v-for="(item, index) in componentsnameList" :key="index">{{
+            item
+          }}</span>
+          <i
+            v-if="show"
+            class="el-icon-d-arrow-left"
+            title="折叠"
+            @click="show = !show"
+          ></i>
+        </div>
+      </div>
+    </el-collapse-transition>
+    <div class="recommended" v-show="!show">
+      <i class="el-icon-d-arrow-right" title="展开" @click="show = !show"></i>
     </div>
     <!-- 元器件表格 -->
     <tableCont @getDpaRecommended="getDpaRecommended" />
@@ -45,6 +48,7 @@ export default {
   },
   data () {
     return {
+      show: true,
       // 搜索
       inputV: '',
       //传给tableCount的值
@@ -121,6 +125,7 @@ export default {
     border-top: 1px solid #b9d6ff;
     border-bottom: 1px solid #b9d6ff;
     text-align: center;
+    position: relative;
     span {
       display: inline-block;
       width: 7%;
@@ -129,6 +134,20 @@ export default {
       &:hover {
         color: #396fff;
       }
+    }
+    .el-icon-d-arrow-right {
+      position: absolute;
+      bottom: -13px;
+      left: 50%;
+      transform: rotate(90deg);
+      cursor: pointer;
+    }
+    .el-icon-d-arrow-left {
+      position: absolute;
+      bottom: 0px;
+      left: 50%;
+      transform: rotate(90deg);
+      cursor: pointer;
     }
   }
 }
