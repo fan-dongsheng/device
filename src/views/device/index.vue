@@ -46,9 +46,9 @@
         >
         </el-option>
       </el-select>
-      <span v-for="(item, index) in componentsnameList" :key="index">{{
+      <!-- <span v-for="(item, index) in componentsnameList" :key="index">{{
         item
-      }}</span>
+      }}</span> -->
     </div>
 
     <!-- 元器件表格 -->
@@ -67,22 +67,7 @@ export default {
   data () {
     return {
       //产品推荐的下拉框
-      options: [{
-        value: '选项1',
-        label: '黄金糕'
-      }, {
-        value: '选项2',
-        label: '双皮奶'
-      }, {
-        value: '选项3',
-        label: '蚵仔煎'
-      }, {
-        value: '选项4',
-        label: '龙须面'
-      }, {
-        value: '选项5',
-        label: '北京烤鸭'
-      }],
+      options: [],
       //产品推荐下拉二
       optionsType: [
         {
@@ -125,13 +110,14 @@ export default {
     },
     //改变一级分类调取产品推荐
     async changeType (val) {
+      console.log(val, '==============>');
       if (this.tabs == 'second') {
 
-        this.getDpaRecommendedtype()
+        this.getDpaRecommendedtype(val)
         // const { data } = await getDpaRecommended()
         // this.componentsnameList = data.data.componentsnameList
-      } else if (this.tabs == 'first') {
-        this.getRecommended()
+      } else {
+        this.getRecommended(val)
         // this.getRecommended()
       }
     },
@@ -139,22 +125,55 @@ export default {
     async getLeve () {
       const { data } = await getLeve()
       console.log(data, '一级分类');
+      let dataInfo = data.data.info.map((item, index) => {
+        return {
+          value: item.name,
+          label: item.name
+        }
+      })
+      this.options = dataInfo
     },
     //获取复验产品推荐
-    async getRecommended () {
-      const { data } = await getRecommended()
-      this.componentsnameList = data.data.componentsnameList
+    async getRecommended (val) {
+      let value = {
+        primaryclassification: val
+      }
+      const { data } = await getRecommended(value)
+      console.log(data, '场频推荐');
+      let dataList = data.data.componentsnameList.map((item, index) => {
+        return {
+          value: item,
+          label: item
+        }
+      })
+      this.optionsType = dataList
 
     },
     //获取dpa一级分类
     async getLeveDpa () {
       const { data } = await getLeveDpa()
       console.log(data, 'dpa一级分类');
+      let dataInfo = data.data.info.map((item, index) => {
+        return {
+          value: item.name,
+          label: item.name
+        }
+      })
+      this.options = dataInfo
     },
     //获取dpa产品推荐
-    async getDpaRecommendedtype () {
-      const { data } = await getDpaRecommended()
-      this.componentsnameList = data.data.componentsnameList
+    async getDpaRecommendedtype (val) {
+      let value = {
+        primaryclassification: val
+      }
+      const { data } = await getDpaRecommended(value)
+      let dataList = data.data.componentsnameList.map((item, index) => {
+        return {
+          value: item,
+          label: item
+        }
+      })
+      this.optionsType = dataList
 
     },
     //监听tabs传过来的值
@@ -171,7 +190,8 @@ export default {
     }
   },
   created () {
-    this.getRecommended()
+    // this.getRecommended()
+    this.getLeve()
   }
 }
 </script>
