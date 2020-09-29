@@ -168,14 +168,15 @@ export function anli (name, data, secret) {
   // var dataX = [], data_one = [], data_two = [], data_three = [], dest = [];
   // group1("name", data, dest);
 
-  var ovrData = [
-    { name: "校纪校规", value: 80 },
-    { name: "文明礼仪文明礼仪", value: 120 },
-    { name: "作息出勤作息出勤作息出勤", value: 310 },
-    { name: "体锻课", value: 100 },
-    { name: "劳动卫生劳动卫生劳动卫生劳动卫生", value: 60 },
-    { name: "大课间", value: 500 }
-  ];
+  // var ovrData = [
+  //   { name: "校纪校规", value: 80 },
+  //   { name: "文明礼仪文明礼仪", value: 120 },
+  //   { name: "作息出勤作息出勤作息出勤", value: 310 },
+  //   { name: "体锻课", value: 100 },
+  //   { name: "劳动卫生劳动卫生劳动卫生劳动卫生", value: 60 },
+  //   { name: "大课间", value: 500 }
+  // ];
+  var ovrData = data
   ovrData.sort(function (a, b) {
     return b.value - a.value;
   }).slice(0, 6);
@@ -274,17 +275,19 @@ export function anliType (name, data, secret) {
     var commonSubTitle = secret + commonSubTitleStar;
   }
   var myChart = echarts.init(document.getElementById(name));
+
   // var dataX = [], data_one = [], data_two = [], data_three = [], dest = [];
   // group1("name", data, dest);
 
-  var ovrData = [
-    { name: "校纪校规", value: 80 },
-    { name: "文明礼仪文明礼仪", value: 120 },
-    { name: "作息出勤作息出勤作息出勤", value: 310 },
-    { name: "体锻课", value: 100 },
-    { name: "劳动卫生劳动卫生劳动卫生劳动卫生", value: 60 },
-    { name: "大课间", value: 500 }
-  ];
+  // var ovrData = [
+  //   { name: "校纪校规", value: 80 },
+  //   { name: "文明礼仪文明礼仪", value: 120 },
+  //   { name: "作息出勤作息出勤作息出勤", value: 310 },
+  //   { name: "体锻课", value: 100 },
+  //   { name: "劳动卫生劳动卫生劳动卫生劳动卫生", value: 60 },
+  //   { name: "大课间", value: 500 }
+  // ];
+  var ovrData = data
   ovrData.sort(function (a, b) {
     return b.value - a.value;
   }).slice(0, 6);
@@ -601,6 +604,96 @@ export function PaiXu3 (name, data, secret) {
         label: labelOption,
         // data: [150, 232, 201, 154, 190]
         data: data_three
+      }
+    ]
+  };
+  myChart.setOption(option);
+}
+//复验批退
+export function back (name, data, secret) {
+  var arr = [];
+  var lx = [];
+  for (var i = 0; i < data.length; i++) {
+    if (lx.indexOf(data[i].name) == -1) {
+      lx.push(data[i].name);
+    }
+  }
+  for (var i = 0; i < lx.length; i++) {
+    var value = 0;
+    for (var j = 0; j < data.length; j++) {
+      if (lx[i] == data[j].name) {
+        value += parseInt(data[j].value);
+      }
+    }
+    var array = {
+      name: lx[i],
+      value: value
+    }
+    arr.push(array);
+  }
+  var commonSubTitle = "机密★";
+  var commonSubTitleStar = "★";
+  if (secret) {
+    commonSubTitle = secret + commonSubTitleStar;
+  }
+  var myChart = echarts.init(document.getElementById(name));
+  var option = {
+    color: ['#FFB6C1', '#DB7093', 'rgba(49,197,197,0.8)', '#FF00FF', '#87CEFA', '#00BFFF', '#00FA9A', '#FFD700', '#F5F5F5', 'rgba(182,162,223,0.8)', 'rgba(214,112,112,0.8)', 'rgba(254,185,128,0.8)', 'rgba(85,179,240,0.8)'],
+    // backgroundColor: '#f9f9f9',
+    title: {
+      text: '批退器件出现频次',
+      left: 'center',
+      bottom: '10',
+      // subtext: commonSubTitle,
+      // subtextStyle: {
+      //   fontSize: 15,
+      //   color: '#fff',
+      // },
+      padding: [0, 0],
+      textStyle: {
+        color: '#fff',
+        fontSize: 13,
+        align: 'center'
+      },
+    },
+    tooltip: {
+      trigger: 'item',
+      formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+      orient: 'vertical',
+      top: "middle",
+      left: "4%",
+      // left: 'left',
+      // data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎'],
+      data: arr,
+      textStyle: {                 //----图例内容样式
+        color: '#fff',               //---所有图例的字体颜色
+        //backgroundColor:'black',  //---所有图例的字体背景色
+        fontSize: 11
+      }
+    },
+    series: [
+      {
+        name: '器件类型',
+        type: 'pie',
+        radius: '55%',
+        center: ['50%', '55%'],
+        // data:[
+        // {value:335, name:'直接访问'},
+        // {value:310, name:'邮件营销'},
+        // {value:234, name:'联盟广告'},
+        // {value:135, name:'视频广告'},
+        // {value:1548, name:'搜索引擎'}
+        // ],
+        data: arr.sort(function (a, b) { return a.value - b.value; }),
+        itemStyle: {
+          emphasis: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
       }
     ]
   };

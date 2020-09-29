@@ -23,12 +23,12 @@
       </div> -->
       <div class="title" @click="activeTle(3)" :class="{ common: active == 3 }">
         <div class="box">
-          <span>复验筛选不合格占比(%)按生产 厂家排序</span>
+          <span>复验筛选不合格按生产厂家次数排序</span>
         </div>
       </div>
       <div class="title" @click="activeTle(4)" :class="{ common: active == 4 }">
         <div class="box">
-          <span>批退</span>
+          <span>批退频次按元器件类型</span>
         </div>
       </div>
     </div>
@@ -49,25 +49,20 @@
         style="width: 100%; height: 100%"
         v-show="active == 2"
       ></div>
-      <!-- <div
-        id="PaiXu2"
-        style="width: 100%; height: 100%"
-        v-show="active == 3"
-      ></div> -->
       <div
         id="anli"
         style="width: 100%; height: 100%"
         v-show="active == 3"
       ></div>
-      <!-- <div
-        id="anli"
+      <div
+        id="back"
         style="width: 100%; height: 100%"
         v-show="active == 4"
-      ></div> -->
+      ></div>
     </div>
     <el-dialog
       @open="huidiao"
-      title="详情"
+      :title="$store.state.FactorName"
       :visible.sync="$store.state.echartsVisble"
     >
       <div id="anli1" style="width: 100%; min-height: 300px"></div>
@@ -76,8 +71,8 @@
 </template>
 
 <script>
-import { PaiXu, EacHFn1, echartsOne, anli, anliType } from './ea'
-import { getCountcountriesorimports, getCountprimaryclassification, getCountcomponentstype, getCountmanufacturer, getQuerynowmanufacturer } from '@/api/screen'
+import { PaiXu, EacHFn1, echartsOne, anli, anliType, back } from './ea'
+import { getCountcountriesorimports, getCountprimaryclassification, getCountcomponentstype, getCountmanufacturer, getQuerynowmanufacturer, getBack } from '@/api/screen'
 export default {
   data () {
     return {
@@ -217,7 +212,24 @@ export default {
           "value": "0"
         }
       ],
-      dataZuanqu: []
+      dataZuanqu: [],
+      //复验批退
+      dataBack: [{
+        "name": "ADC/DAC",
+        "value": 13
+      },
+      {
+        "name": "CPLD/EPLD",
+        "value": 8
+      },
+      {
+        "name": "DC/DC（单路）",
+        "value": 15
+      },
+      {
+        "name": "DC/DC（双路）",
+        "value": 6
+      }]
     }
   },
   methods: {
@@ -226,11 +238,11 @@ export default {
       //点击查询排序的厂家型号
       console.log(this.$store.state.FactorName);
       this.getQuerynowmanufacturer(this.$store.state.FactorName)
-      this.$nextTick(function () {
-        //用来解决数据不更新问题
+      // this.$nextTick(function () {
+      //   //用来解决数据不更新问题
 
-        anliType('anli1', this.dataZuanqu, null)
-      });
+      //   anliType('anli1', this.dataZuanqu, null)
+      // });
       // this.$store.commit('echartsVisble', false)
     },
     activeTle (index) {
@@ -263,6 +275,7 @@ export default {
         this.$nextTick(function () {
           //用来解决数据不更新问题
           // anli('anli', this.datasFour, null)
+          back('back', this.dataBack, null)
         });
       }
     },
@@ -293,19 +306,28 @@ export default {
     //复验筛选不合格器件按生产厂家占比排序
     async getCountmanufacturer () {
       const { data } = await getCountmanufacturer()
+      console.log(data, '选不合格器件按生产厂家占比排序');
       this.datasFour = data.data.countmanufacturerList
       // PaiXu3('PaiXu3', this.datasFour, null)
     },
     //排序点击获取厂家型号具体排列
     async getQuerynowmanufacturer (val) {
+
       const { data } = await getQuerynowmanufacturer({
         manufacturer: val
       })
-      console.log(data, 'paixiiii');
-      this.dataZuanqu = data
+      this.dataZuanqu = data.data.querynowmanufacturerList
+      this.$nextTick(function () {
+        //用来解决数据不更新问题
+        anliType('anli1', this.dataZuanqu, null)
+      });
     },
     //获取批退的数据
+    async getBack () {
+      const { data } = await getBack()
 
+      this.dataBack = data.data.countBackList
+    },
   },
   mounted () {
 
@@ -315,6 +337,7 @@ export default {
     this.getCountcomponentstype()
     // this.getOrdermanufacturer()
     this.getCountmanufacturer()
+    this.getBack()
   },
   watch: {
     '$store.state.TimeScreen': function (val) {
@@ -324,6 +347,7 @@ export default {
       this.getCountcomponentstype()
       // this.getOrdermanufacturer()
       this.getCountmanufacturer()
+      this.getBack()
     }
   }
 }

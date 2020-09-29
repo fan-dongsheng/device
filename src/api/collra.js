@@ -15,20 +15,37 @@ export const getDpa = params => {
     params
   })
 }
-//获取复验产品推荐
-export const getRecommended = () => {
+//复验筛选：按照一级分类分组查询接口
+export const getLeve = () => {
   return request({
     method: 'GET',
-    url: '/querycomponentsname'
+    url: '/queryprimaryclassification'
+  })
+}
+//获取复验产品推荐
+export const getRecommended = params => {
+  return request({
+    method: 'GET',
+    url: '/querycomponentsname',
+    params
+  })
+}
+//DPA筛选：按照一级分类分组查询接口
+export const getLeveDpa = () => {
+  return request({
+    method: 'GET',
+    url: 'dpa/queryprimaryclassification'
   })
 }
 //获取dpa产品推荐
-export const getDpaRecommended = () => {
+export const getDpaRecommended = params => {
   return request({
     method: 'GET',
-    url: 'dpa/querycomponentsname'
+    url: 'dpa/querycomponentsname',
+    params
   })
 }
+
 //复验关键字搜索
 export const getFind = params => {
   return request({

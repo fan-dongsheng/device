@@ -13,26 +13,44 @@
       </el-button>
     </div>
 
-    <el-collapse-transition>
-      <div v-show="show">
-        <!-- 产品推荐 -->
-        <div class="recommended">
-          <span style="border-right: 1px #396fff solid">产品推荐</span>
-          <span v-for="(item, index) in componentsnameList" :key="index">{{
-            item
-          }}</span>
-          <i
-            v-if="show"
-            class="el-icon-d-arrow-left"
-            title="折叠"
-            @click="show = !show"
-          ></i>
-        </div>
-      </div>
-    </el-collapse-transition>
-    <div class="recommended" v-show="!show">
-      <i class="el-icon-d-arrow-right" title="展开" @click="show = !show"></i>
+    <!-- 产品推荐 -->
+    <div class="recommended">
+      <span style="border-right: 1px #396fff solid">产品推荐</span>
+      <el-select
+        @change="changeType"
+        clearable
+        v-model="LeveValue"
+        size="small"
+        placeholder="请选择一级分类"
+        class="level"
+      >
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        >
+        </el-option>
+      </el-select>
+      <el-select
+        clearable
+        v-model="LeveTvalue"
+        size="small"
+        placeholder="请选择"
+      >
+        <el-option
+          v-for="item in optionsType"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        >
+        </el-option>
+      </el-select>
+      <span v-for="(item, index) in componentsnameList" :key="index">{{
+        item
+      }}</span>
     </div>
+
     <!-- 元器件表格 -->
     <tableCont @getDpaRecommended="getDpaRecommended" />
   </div>
@@ -40,7 +58,7 @@
 
 <script>
 import tableCont from './tableCont'
-import { getRecommended, getDpaRecommended } from '@/api/collra.js'
+import { getRecommended, getDpaRecommended, getLeve, getLeveDpa } from '@/api/collra.js'
 import eventBus from '@/eventBus'
 export default {
   components: {
@@ -48,13 +66,53 @@ export default {
   },
   data () {
     return {
-      show: true,
+      //产品推荐的下拉框
+      options: [{
+        value: '选项1',
+        label: '黄金糕'
+      }, {
+        value: '选项2',
+        label: '双皮奶'
+      }, {
+        value: '选项3',
+        label: '蚵仔煎'
+      }, {
+        value: '选项4',
+        label: '龙须面'
+      }, {
+        value: '选项5',
+        label: '北京烤鸭'
+      }],
+      //产品推荐下拉二
+      optionsType: [
+        {
+          value: '选项1',
+          label: '黄金糕'
+        }, {
+          value: '选项2',
+          label: '双皮奶'
+        }, {
+          value: '选项3',
+          label: '蚵仔煎'
+        }, {
+          value: '选项4',
+          label: '龙须面'
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        }
+      ],
+      //一级分类
+      LeveValue: "",
+      //二级分类
+      LeveTvalue: '',
       // 搜索
       inputV: '',
       //传给tableCount的值
       inputNew: '',
       //复验产品推荐
-      componentsnameList: []
+      componentsnameList: [],
+      tabs: ''
 
     }
   },
@@ -65,19 +123,50 @@ export default {
       this.inputNew = this.inputV
       eventBus.$emit('keyWord', this.inputV)
     },
+    //改变一级分类调取产品推荐
+    async changeType (val) {
+      if (this.tabs == 'second') {
+
+        this.getDpaRecommendedtype()
+        // const { data } = await getDpaRecommended()
+        // this.componentsnameList = data.data.componentsnameList
+      } else if (this.tabs == 'first') {
+        this.getRecommended()
+        // this.getRecommended()
+      }
+    },
+    //获取产品推荐一级分类
+    async getLeve () {
+      const { data } = await getLeve()
+      console.log(data, '一级分类');
+    },
     //获取复验产品推荐
     async getRecommended () {
       const { data } = await getRecommended()
       this.componentsnameList = data.data.componentsnameList
 
     },
+    //获取dpa一级分类
+    async getLeveDpa () {
+      const { data } = await getLeveDpa()
+      console.log(data, 'dpa一级分类');
+    },
     //获取dpa产品推荐
+    async getDpaRecommendedtype () {
+      const { data } = await getDpaRecommended()
+      this.componentsnameList = data.data.componentsnameList
+
+    },
+    //监听tabs传过来的值
     async getDpaRecommended (val) {
+      this.tabs = val
       if (val == 'second') {
-        const { data } = await getDpaRecommended()
-        this.componentsnameList = data.data.componentsnameList
+        this.getLeveDpa()
+        // const { data } = await getDpaRecommended()
+        // this.componentsnameList = data.data.componentsnameList
       } else if (val == 'first') {
-        this.getRecommended()
+        this.getLeve()
+        // this.getRecommended()
       }
     }
   },
@@ -121,33 +210,21 @@ export default {
     flex-wrap: wrap;
     background: #e5f0ff;
     padding: 20px 10px;
-    padding-bottom: 10px;
     border-top: 1px solid #b9d6ff;
     border-bottom: 1px solid #b9d6ff;
     text-align: center;
     position: relative;
+    align-items: center;
     span {
       display: inline-block;
       width: 7%;
-      margin-bottom: 10px;
       cursor: pointer;
       &:hover {
         color: #396fff;
       }
     }
-    .el-icon-d-arrow-right {
-      position: absolute;
-      bottom: -13px;
-      left: 50%;
-      transform: rotate(90deg);
-      cursor: pointer;
-    }
-    .el-icon-d-arrow-left {
-      position: absolute;
-      bottom: 0px;
-      left: 50%;
-      transform: rotate(90deg);
-      cursor: pointer;
+    .level {
+      margin: 0 10px;
     }
   }
 }

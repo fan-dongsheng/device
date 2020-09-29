@@ -105,5 +105,12 @@ export const getQuerynowmanufacturer = params => {
     params
   })
 }
-
+//批退器件频次查询
+export const getBack = params => {
+  return request({
+    method: 'GET',
+    url: '/back',
+    params
+  })
+}
 
